@@ -11,9 +11,9 @@ Employee.destroy_all
 
 employees=Employee.create([{
   Title: "CEO",
-  FirstName: "Patrick",
+  FirstName: "Nicolas",
   LastName: "Genest",
-  Email: "Patrick.genest@codeboxx.biz"
+  Email: "nicolas.genest@codeboxx.biz"
 },{
     Title: "Director",
     FirstName: "Nadya",
