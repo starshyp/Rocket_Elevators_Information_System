@@ -9,4 +9,11 @@ Rails.application.routes.draw do
 	get "/residential", to: "rocket#residential"
 	get "/commercial.html", to: redirect("/commercial")
 	get "/commercial", to: "rocket#commercial"
-  end
+
+	mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
+	resources :employees
+	get 'home/index'
+	get 'home_controller/index'
+	devise_for :users     
+
+end
