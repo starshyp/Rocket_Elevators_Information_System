@@ -53,6 +53,10 @@ function lookForTagInElement(element, tag)
 
 let selectedBuilding = "residential";
 
+function getSelectedBuilding() {
+	return buildingTypes[selectedBuilding];
+}
+
 function calculateAmountOfColumns()
 {
 	switch(selectedBuilding) 
@@ -125,15 +129,15 @@ function getProductLine()
 {
 	if(document.getElementById("standard").checked)
 	{
-		return 1;
+		return "standard";
 	}
 	else if(document.getElementById("premium").checked)
 	{
-		return 2;
+		return "premium";
 	}
 	else if(document.getElementById("excelium").checked)
 	{
-		return 3;
+		return "excelium";
 	}
 	return "none";
 }
@@ -143,11 +147,11 @@ function calculateUnitPrice()
 	let productline = getProductLine();
 	switch(productline)
 	{
-		case 1:
+		case "standard":
 			return 7565;
-		case 2:
+		case "premium":
 			return 12345;
-		case 3:
+		case "excelium":
 			return 15400;
 	}
 	//how would the runtime even reach here??
@@ -159,11 +163,11 @@ function getInstallationFeesMultiplier()
 	let productline = getProductLine();
 	switch(productline)
 	{
-		case 1:
+		case "standard":
 			return 1.1;
-		case 2:
+		case "premium":
 			return 1.13;
-		case 3:
+		case "excelium":
 			return 1.16;
 	}
 	return 1;
@@ -284,3 +288,66 @@ function OnReady()
 }
 
 $(document).ready(OnReady)
+
+
+
+// quote sumbitting
+
+//testing purposes
+function fieldarefilled() {
+	let currentBuildingType = buildingTypes[selectedBuilding]
+	if(!selectedBuilding)
+		return false;
+	for(i=0; i<currentBuildingType; i++)
+	{
+		if(inputValues[currentBuildingType[i]].value == null)
+		{
+			return false
+		}
+	}
+
+	return true
+};
+
+function sumbitquote() {
+	if(!fieldarefilled())
+		return;
+	$.ajax({
+		url:'/quotes/create',
+		type:'POST',
+		dataType:'json',
+		data:{
+			quote:{
+				BuildingType: selectedBuilding,
+				NumberOfFloors: inputValues["number-of-floors"].value,
+				NumberOfBasements: inputValues["number-of-basements"].value,
+				NumberOfcompanies: inputValues["number-of-companies"].value,
+				NumberOfParkingSpots: inputValues["number-of-parking-spots"].value,
+				NumberOfElevators: inputValues["number-of-elevators"].value,
+				NumberOfApartments: inputValues["number-of-apartments"].value,
+				NumberOfCorporations: inputValues["number-of-corporations"].value,
+				NumberOfOccupany: inputValues["maximum-occupancy"].value,
+				NumberOfBusinessHours: inputValues["business-hours"].value,
+				ElevatorAmount: inputValues["elevator-amount"].value,
+				ColumnAmount: inputValues["column-amount"].value,
+				ProductLine: getProductLine(),
+				ElevatorUnitCost: calculateUnitPrice(),
+				ElevatorTotalCost: calculateElevatorTotalPrice(),
+				InstallationCost: calculateInstallationPrice(),
+				TotalPrice: calculateTotalPrice()
+			},
+			authenticity_token: window._token
+		},
+		success:function(data){
+			alert("success!!!")
+			console.log(data)
+		},
+		error:function(data){
+			alert("failed!!!")
+			console.log(data)
+		}
+	});
+};
+
+
+$("#sumbit-quote").on("click", sumbitquote)

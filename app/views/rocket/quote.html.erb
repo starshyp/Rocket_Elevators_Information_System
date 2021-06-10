@@ -4,6 +4,7 @@
 		<meta charset="utf-8" />
 		<title>Rocket Elevators - Quote</title>
 		<meta name="description" content="" />
+
 	</head>
 
 	<body class="smoothscroll enable-animation">
@@ -100,6 +101,8 @@
 					</div>
 				</div>
 
+				<button type="button" class="btn btn-primary btn-lg" id="sumbit-quote">Submit</button>
+
 				<hr/><!-- 1px line separator -->
 
 				<h3>Quote:</h3>
@@ -138,12 +141,14 @@
 
 
 		<!-- JAVASCRIPT FILES -->
-		<script>var plugin_path = 'assets/';</script>
 
 		<script src="/assets/scripts.js"></script>
 		
 		<!-- PAGELEVEL SCRIPTS -->
+		<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
 		<script src="/assets/quote.js"></script>
+
+		
 
 	</body>
 </html>

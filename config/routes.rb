@@ -2,13 +2,10 @@ Rails.application.routes.draw do
   resources :quotes
 	root "rocket#index"
   
-	get "/index.html", to: redirect("/index")
+	post "/home/testpost", to: "home#testpost"
 	get "/index", to: "rocket#index"
-	get "/quote.html", to: redirect("/quote")
 	get "/quote", to: "rocket#quote"
-	get "/residential.html", to: redirect("/residential")
 	get "/residential", to: "rocket#residential"
-	get "/commercial.html", to: redirect("/commercial")
 	get "/commercial", to: "rocket#commercial"
 
 	mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
@@ -17,4 +14,5 @@ Rails.application.routes.draw do
 	get 'home_controller/index'
 	devise_for :users     
 
+	post "/quotes/create", to: "quotes#create"
 end
