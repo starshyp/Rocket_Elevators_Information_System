@@ -284,3 +284,53 @@ function OnReady()
 }
 
 $(document).ready(OnReady)
+
+
+
+// quote sumbitting
+
+
+function fieldarefilled() {
+				
+};
+
+function sumbitquote() {
+	 $.ajax({
+		url:'/quotes/create',
+		type:'POST',
+		dataType:'json',
+		data:{
+			quote:{
+				BuildingType: "test building",
+				NumberOfFloors: 0,
+				NumberOfBasements: 1,
+				NumberOfcompanies: 2,
+				NumberOfParkingSpots: 3,
+				NumberOfElevators: 4,
+				NumberOfApartments: 5,
+				NumberOfCorporations: 6,
+				NumberOfOccupany: 7,
+				NumberOfBusinessHours: 8,
+				ElevatorAmount: 9,
+				ColumnAmount: 10,
+				ProductLine: "11S",
+				ElevatorUnitCost: 12,
+				ElevatorTotalCost: 13,
+				InstallationCost: 14,
+				TotalPrice: 15
+			},
+			authenticity_token: window._token
+		},
+		success:function(data){
+			alert("success!!!")
+			console.log(data)
+		},
+		error:function(data){
+			alert("failed!!!")
+			console.log(data)
+		}
+	});
+};
+
+
+$("#sumbit-quote").on("click", sumbitquote)
