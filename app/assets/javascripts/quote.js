@@ -163,11 +163,11 @@ function getInstallationFeesMultiplier()
 	let productline = getProductLine();
 	switch(productline)
 	{
-		case 1:
+		case "standard":
 			return 1.1;
-		case 2:
+		case "premium":
 			return 1.13;
-		case 3:
+		case "excelium":
 			return 1.16;
 	}
 	return 1;
