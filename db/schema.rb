@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_120241) do
+ActiveRecord::Schema.define(version: 2021_06_09_132647) do
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "FirstName"
@@ -57,4 +57,5 @@ ActiveRecord::Schema.define(version: 2021_06_09_120241) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "employees", "users"
 end
