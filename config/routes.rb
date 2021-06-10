@@ -14,4 +14,5 @@ Rails.application.routes.draw do
 	get 'home_controller/index'
 	devise_for :users     
 
+	post "/quotes/create", to: "quotes#create"
 end
