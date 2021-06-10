@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :quotes
 	root "rocket#index"
   
 	post "/home/testpost", to: "home#testpost"
