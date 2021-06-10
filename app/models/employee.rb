@@ -1,2 +1,3 @@
-class Employee < ApplicationRecord
+class Employee < ApplicationRecord 
+    belongs_to :user
 end
