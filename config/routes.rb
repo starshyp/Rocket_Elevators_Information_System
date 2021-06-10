@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
 	root "rocket#index"
   
-	post "/home/search_exams", to: "home#search_exams"
-
+	post "/home/testpost", to: "home#testpost"
 	get "/index", to: "rocket#index"
 	get "/quote", to: "rocket#quote"
 	get "/residential", to: "rocket#residential"
