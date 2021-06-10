@@ -125,15 +125,15 @@ function getProductLine()
 {
 	if(document.getElementById("standard").checked)
 	{
-		return 1;
+		return "standard";
 	}
 	else if(document.getElementById("premium").checked)
 	{
-		return 2;
+		return "premium";
 	}
 	else if(document.getElementById("excelium").checked)
 	{
-		return 3;
+		return "excelium";
 	}
 	return "none";
 }
@@ -143,11 +143,11 @@ function calculateUnitPrice()
 	let productline = getProductLine();
 	switch(productline)
 	{
-		case 1:
+		case "standard":
 			return 7565;
-		case 2:
+		case "premium":
 			return 12345;
-		case 3:
+		case "excelium":
 			return 15400;
 	}
 	//how would the runtime even reach here??
