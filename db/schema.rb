@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_132647) do
     t.string "Email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_employees_on_user_id"
   end
 
