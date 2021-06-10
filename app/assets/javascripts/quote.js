@@ -53,8 +53,8 @@ function lookForTagInElement(element, tag)
 
 let selectedBuilding = "residential";
 
-function getBuildingType() {
-	return selectedBuilding;
+function getSelectedBuilding() {
+	return buildingTypes[selectedBuilding];
 }
 
 function calculateAmountOfColumns()
