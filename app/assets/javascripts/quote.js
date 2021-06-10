@@ -293,35 +293,48 @@ $(document).ready(OnReady)
 
 // quote sumbitting
 
-
+//testing purposes
 function fieldarefilled() {
-				
+	let currentBuildingType = buildingTypes[selectedBuilding]
+	if(!selectedBuilding)
+		return false;
+	for(i=0; i<currentBuildingType; i++)
+	{
+		if(inputValues[currentBuildingType[i]].value == null)
+		{
+			return false
+		}
+	}
+
+	return true
 };
 
 function sumbitquote() {
-	 $.ajax({
+	if(!fieldarefilled())
+		return;
+	$.ajax({
 		url:'/quotes/create',
 		type:'POST',
 		dataType:'json',
 		data:{
 			quote:{
-				BuildingType: "test building",
-				NumberOfFloors: 0,
-				NumberOfBasements: 1,
-				NumberOfcompanies: 2,
-				NumberOfParkingSpots: 3,
-				NumberOfElevators: 4,
-				NumberOfApartments: 5,
-				NumberOfCorporations: 6,
-				NumberOfOccupany: 7,
-				NumberOfBusinessHours: 8,
-				ElevatorAmount: 9,
-				ColumnAmount: 10,
-				ProductLine: "11S",
-				ElevatorUnitCost: 12,
-				ElevatorTotalCost: 13,
-				InstallationCost: 14,
-				TotalPrice: 15
+				BuildingType: selectedBuilding,
+				NumberOfFloors: inputValues["number-of-floors"].value,
+				NumberOfBasements: inputValues["number-of-basements"].value,
+				NumberOfcompanies: inputValues["number-of-companies"].value,
+				NumberOfParkingSpots: inputValues["number-of-parking-spots"].value,
+				NumberOfElevators: inputValues["number-of-elevators"].value,
+				NumberOfApartments: inputValues["number-of-apartments"].value,
+				NumberOfCorporations: inputValues["number-of-corporations"].value,
+				NumberOfOccupany: inputValues["maximum-occupancy"].value,
+				NumberOfBusinessHours: inputValues["business-hours"].value,
+				ElevatorAmount: inputValues["elevator-amount"].value,
+				ColumnAmount: inputValues["column-amount"].value,
+				ProductLine: getProductLine(),
+				ElevatorUnitCost: calculateUnitPrice(),
+				ElevatorTotalCost: calculateElevatorTotalPrice(),
+				InstallationCost: calculateInstallationPrice(),
+				TotalPrice: calculateTotalPrice()
 			},
 			authenticity_token: window._token
 		},
