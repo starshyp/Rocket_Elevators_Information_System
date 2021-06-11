@@ -93,6 +93,14 @@
 											</a>
 										</li>
 									<% end %>
+
+									<% if has_role?(:admin) %>
+										<li><!-- BACK OFFICE -->
+											<a href="/admin" id="admin-nav">
+												BACK OFFICE
+											</a>
+										</li>
+									<% end %>
 								</ul>
 
 							</nav>
