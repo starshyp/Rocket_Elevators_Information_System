@@ -1,24 +1,21 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
 
-* Ruby version
+* Ruby version : ruby 2.6.6
 
-* System dependencies
+* Rails version: Rails 5.2.6
 
-* Configuration
+* Important Gems: Cancancan, rails-Admin, Devise and Rolify.
 
-* Database creation
+* Database: MySql.
 
-* Database initialization
+* Tables: Users, Employees, Roles and Quotes.
 
-* How to run the test suite
+* Seeding: 21 users(with the password of :codeboxx) and employees seeded.
 
-* Services (job queues, cache servers, search engines, etc.)
+* Admin of the site: Nicolas Genest With the email adress of nicolas.genest@codeboxx.biz(password:codeboxx).
 
-* Deployment instructions
+* Back Office ONLY visible to admin.
 
-* ...
+
