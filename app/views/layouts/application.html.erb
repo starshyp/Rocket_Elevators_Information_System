@@ -30,7 +30,7 @@
 						</button>
 
 						<!-- Logo -->
-						<a class="logo float-left scrollTo" href="/index#top">
+						<a class="logo float-left" href="/index#top">
 							<img src="/assets/logo.png" alt="" />
 						</a>
 
@@ -51,7 +51,7 @@
 								-->
 								<ul id="topMain" class="nav nav-pills nav-main nav-onepage">
 									<li class="active"><!-- HOME -->
-										<a href="/index#home" id="home-nav">
+										<a href="/index#top" id="home-nav">
 											HOME
 										</a>
 									</li>
@@ -179,6 +179,15 @@
 		<!-- SCROLL TO TOP -->
 		<a href="#" id="toTop"></a>
 
+		<!-- PRELOADER -->
+		<div id="preloader">
+			<div class="inner">
+				<span class="loader"></span>
+			</div>
+		</div><!-- /PRELOADER -->
+
 		<p class="notice"><%= notice %></p>
+
+		<%= javascript_include_tag "scripts" , 'data-turbolinks-track': 'reload' %>
 	</body>
 </html>

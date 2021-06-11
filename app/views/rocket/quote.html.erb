@@ -7,7 +7,7 @@
 
 	</head>
 
-	<body class="smoothscroll enable-animation">
+	<body class="enable-animation">
 
 		<!-- wrapper -->
 		<div id="wrapper">
@@ -132,22 +132,12 @@
 		</div>
 		<!-- /wrapper -->
 
-		<!-- PRELOADER -->
-		<div id="preloader">
-			<div class="inner">
-				<span class="loader"></span>
-			</div>
-		</div><!-- /PRELOADER -->
-
 
 		<!-- JAVASCRIPT FILES -->
 
-		<script src="/assets/scripts.js"></script>
-		
 		<!-- PAGELEVEL SCRIPTS -->
 		<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
-		<script src="/assets/quote.js"></script>
-
+		<%= javascript_include_tag "quote" %>
 		
 
 	</body>
