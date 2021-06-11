@@ -14,3 +14,9 @@
 //= require activestorage
 //= require jquery-3.3.1.min
 //= link scripts
+//= link contact
+//= link quote
+//= link gmaps
+//= link view/demo.revolution_slider.js
+//= link slider.revolution/js/jquery.themepunch.revolution.min.js
+//= link slider.revolution/js/jquery.themepunch.tools.min.js
