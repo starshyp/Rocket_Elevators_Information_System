@@ -28,6 +28,7 @@ user = User.create!(
 email: "nadya.fortier@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
 
 employees=Employee.create!(
 Title: "Director",
@@ -40,6 +41,7 @@ user = User.create!(
 email: "martin.chantal@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
 
 employees=Employee.create!(
 Title: "Assistant Director",
@@ -53,6 +55,8 @@ user = User.create!(
 email: "mathieu.houde@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Captain",
 FirstName: "Mathieu",
@@ -63,7 +67,8 @@ user: user)
 user = User.create!(
   email:"patrick.thibault@codeboxx.biz" ,
   password:"codeboxx",
-  password_confirmation:"codeboxx")  
+  password_confirmation:"codeboxx")
+  user.add_role :admin  
 
 employees=Employee.create!(
 Title: "Captain",
@@ -71,10 +76,13 @@ FirstName: "Patrick",
 LastName: "Thibault",
 Email: "patrick.thibault@codeboxx.biz",
 user: user )
+
 user = User.create!(
 email:"david.boutin@codeboxx.biz",
 password:"codeboxx",
-password_confirmation:"codeboxx") 
+password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Engineer",
 FirstName: "David",
@@ -86,6 +94,8 @@ user = User.create!(
 email:"mathieu.lortie@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Engineer",
 FirstName: "Mathieu",
@@ -97,6 +107,8 @@ user = User.create!(
 email:"thomas.carrier@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Engineer",
 FirstName: "Thomas",
@@ -108,6 +120,8 @@ user = User.create!(
 email:"serge.savoie@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Engineer",
 FirstName: "Serge",
@@ -119,6 +133,8 @@ user = User.create!(
 email:"francis.patry-jessop@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Engineer",
 FirstName: "Francis",
@@ -130,6 +146,8 @@ user = User.create!(
 email:"mathieu.lefrancois@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Engineer",
 FirstName: "Mathieu",
@@ -141,6 +159,8 @@ user = User.create!(
 email:"david.larochelle@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Engineer",
 FirstName: "David",
@@ -148,11 +168,12 @@ LastName: "Larochelle",
 Email: "david.larochelle@codeboxx.biz",
 user: user)
 
-
 user = User.create!(
 email:"nicolas.pineault@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Engineer",
 FirstName: "Nicolas",
@@ -164,6 +185,8 @@ user = User.create!(
 email:"david.amyot@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Engineer",
 FirstName: "David",
@@ -171,11 +194,12 @@ LastName: "Amyot",
 Email: "david.amyot@codeboxx.biz",
 user: user)
 
-
 user = User.create!(
 email:"remi.gagnon@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Engineer",
 FirstName: "Remi",
@@ -187,6 +211,8 @@ user = User.create!(
 email:"timothy.wever@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Developer",
 FirstName: "Timothy",
@@ -194,11 +220,12 @@ LastName: "Wever",
 Email: "timothy.wever@codeboxx.biz",
 user: user)
 
-
 user = User.create!(
 email:"kiril.kleinerman@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Developer",
 FirstName: "Kiril",
@@ -210,6 +237,8 @@ user = User.create!(
 email:"emmanuela.derilus@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Developer",
 FirstName: "Emmanuela",
@@ -217,12 +246,12 @@ LastName: "Derilus",
 Email: "emmanuela.derilus@codeboxx.biz",
 user: user)
 
-
-
 user = User.create!(
 email: "abdul.akeeb@codebozz.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Developer",
 FirstName: "Abdul",
@@ -230,11 +259,12 @@ LastName: "Akeeb",
 Email: "abdul.akeeb@codebozz.biz",
 user: user)
 
-
 user = User.create!(
 email:"krista.sheely@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Developer",
 FirstName: "Krista",
@@ -242,11 +272,12 @@ LastName: "Sheely",
 Email: "krista.sheely@codeboxx.biz",
 user: user)
 
-
 user = User.create!(
 email:"jonathan.murray@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
+
 employees=Employee.create!(
 Title: "Developer",
 FirstName: "Jonathan",
