@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 2021_06_11_152432) do
     t.datetime "updated_at", null: false
   end
 
-<<<<<<< HEAD
   create_table "roles", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -58,9 +57,6 @@ ActiveRecord::Schema.define(version: 2021_06_11_152432) do
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-=======
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb3", force: :cascade do |t|
->>>>>>> 13e26a8184b263b8e76738985e306db6f1474def
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
