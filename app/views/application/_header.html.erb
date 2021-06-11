@@ -55,6 +55,15 @@
 								CONTACT
 							</a>
 						</li>
+						
+						<% if has_role?(:admin) %>
+							<li><!-- BACK OFFICE -->
+								<a href="/admin" id="admin-nav">
+									BACK OFFICE
+								</a>
+							</li>
+						<% end %>
+
 						<% if user_signed_in? %> 
 							<li><!-- LOGOUT -->
 								<a href="/users/sign_out" data-method="delete" id="login-nav">
@@ -65,14 +74,6 @@
 							<li><!-- LOGIN -->
 								<a href="/users/sign_in" id="login-nav">
 									LOGIN
-								</a>
-							</li>
-						<% end %>
-
-						<% if has_role?(:admin) %>
-							<li><!-- BACK OFFICE -->
-								<a href="/admin" id="admin-nav">
-									BACK OFFICE
 								</a>
 							</li>
 						<% end %>
