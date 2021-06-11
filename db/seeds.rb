@@ -15,6 +15,7 @@ user = User.create!(
 email: "nicolas.genest@codeboxx.biz",
 password:"codeboxx",
 password_confirmation:"codeboxx")
+user.add_role :admin
 
 employees=Employee.create!(
 Title: "CEO",
