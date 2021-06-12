@@ -5,6 +5,5 @@
 * Database: MySql.
 * Tables: Users, Employees, Roles and Quotes.
 * Seeding: 21 users(with the password of :codeboxx) and employees seeded.
-* Admin of the site: Nicolas Genest With the email adress of nicolas.genest@codeboxx.biz (password:codeboxx).
-* Back Office ONLY visible to admin.
-
+* Admin of the site: All of the employees of Rocket Elevators havec the admin privileges so it is possible to have access to the Back Office by connecting to their accounts. We used the email adress of nicolas.genest@codeboxx.biz with password codeboxx to test the website.
+* Back Office ONLY visible to admins.
