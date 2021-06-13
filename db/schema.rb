@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_11_152432) do
+ActiveRecord::Schema.define(version: 2021_06_12_185751) do
+
+  create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "TypeOfAddress"
+    t.string "Status"
+    t.string "Entity"
+    t.string "NumberAndStreet"
+    t.string "Apt"
+    t.string "City"
+    t.string "PostalCode"
+    t.string "Country"
+    t.text "Notes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "CompanyName"
+    t.string "NameOfContact"
+    t.string "CompanyContactPhone"
+    t.string "EmailOfTheCompany"
+    t.text "CompanyDescription"
+    t.string "NameOfServiceTechAuthority"
+    t.string "TechAuhtorityPhone"
+    t.string "TechManagerServiceEmail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_customers_on_user_id"
+  end
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "FirstName"
@@ -76,5 +105,6 @@ ActiveRecord::Schema.define(version: 2021_06_11_152432) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "customers", "users"
   add_foreign_key "employees", "users"
 end
