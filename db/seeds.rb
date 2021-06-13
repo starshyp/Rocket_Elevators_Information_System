@@ -5,7 +5,7 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
+require "faker"
 
 Employee.destroy_all
 User.destroy_all
@@ -327,3 +327,23 @@ user: user)
 # CertificateOfOperations: "jnkluiuiuiuoouiuuiuouiuo",
 # Info: "opoo",
 # Notes:"bdsjfhggfhsdfbdggeihigigheibivgdufbdjguiogfneklfhgfldfkldgfklfbsdklfgdkfgbdiogp")
+
+puts User.count
+
+for _ in 0..500 
+  costumers=Customer.create!(
+     user_id: Faker::Number.unique.between(from: 1, to: 21),
+     CompanyName:Faker::Company.unique.name,
+     NameOfContact: Faker::Name.name,
+     CompanyContactPhone: Faker::PhoneNumber.cell_phone,
+     EmailOfTheCompany: Faker::Internet.email,
+     CompanyDescription:Faker::Superhero.name,
+     NameOfServiceTechAuthority:Faker::Name.name,
+     TechAuhtorityPhone:Faker::PhoneNumber.cell_phone,
+     TechManagerServiceEmail:Faker::Internet.email,
+     address_id: address.id
+    )
+end 
+     
+
+
