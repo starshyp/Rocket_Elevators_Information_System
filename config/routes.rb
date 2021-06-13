@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :customers
   resources :addresses
+  resources :building_details
+  resources :buildings
   resources :quotes
 	root "rocket#index"
   
