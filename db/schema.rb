@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_12_185751) do
+ActiveRecord::Schema.define(version: 2021_06_15_145212) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "TypeOfAddress"
@@ -25,21 +25,6 @@ ActiveRecord::Schema.define(version: 2021_06_12_185751) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
-
-  create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "CompanyName"
-    t.string "NameOfContact"
-    t.string "CompanyContactPhone"
-    t.string "EmailOfTheCompany"
-    t.text "CompanyDescription"
-    t.string "NameOfServiceTechAuthority"
-    t.string "TechAuhtorityPhone"
-    t.string "TechManagerServiceEmail"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_customers_on_user_id"
-ActiveRecord::Schema.define(version: 2021_06_15_145211) do
 
   create_table "building_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "InformationKey"
@@ -59,8 +44,25 @@ ActiveRecord::Schema.define(version: 2021_06_15_145211) do
     t.string "TechContactPhone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "customer_id"
+    t.index ["customer_id"], name: "index_buildings_on_customer_id"
+  end
+
+  create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "CompanyName"
+    t.string "NameOfContact"
+    t.string "CompanyContactPhone"
+    t.string "EmailOfTheCompany"
+    t.text "CompanyDescription"
+    t.string "NameOfServiceTechAuthority"
+    t.string "TechAuhtorityPhone"
+    t.string "TechManagerServiceEmail"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.index ["user_id"], name: "index_buildings_on_user_id"
+    t.bigint "address_id"
+    t.index ["address_id"], name: "index_customers_on_address_id"
+    t.index ["user_id"], name: "index_customers_on_user_id"
   end
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -127,11 +129,9 @@ ActiveRecord::Schema.define(version: 2021_06_15_145211) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-<<<<<<< HEAD
-  add_foreign_key "customers", "users"
-=======
   add_foreign_key "building_details", "buildings"
-  add_foreign_key "buildings", "users"
->>>>>>> 0e876d9f5ea3172c100d8693721638b78d895f87
+  add_foreign_key "buildings", "customers"
+  add_foreign_key "customers", "addresses"
+  add_foreign_key "customers", "users"
   add_foreign_key "employees", "users"
 end

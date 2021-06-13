@@ -285,6 +285,28 @@ LastName: "Murray",
 Email: "jonathan.murray@codeboxx.biz",
 user: user)
                                                           
+address=Address.create!(
+TypeOfAddress: "donnnow",
+Status: "ON",
+Entity: "government",
+NumberAndStreet: "24 Kingston",
+Apt: "67",
+City: "Montreal",
+PostalCode:"j78h65",
+Country:"Canada",
+Notes:"bdsjfhggfhsdfbdggeihigigheibivgdufbdjguiogfneklfhgfldfkldgfklfbsdklfgdkfgbdiogp")
+
+customer=Customer.create!(
+CompanyName: "johnINC",
+NameOfContact: "Nicolas",
+CompanyContactPhone: "78918-652-8569",
+EmailOfTheCompany: "njohn connor@chose",
+CompanyDescription: "johjdjffdbidhdiphdkfdighgndipghd;kgdgiphg;kgnipghgipghgegiehgeihgioglgseoighesip",
+NameOfServiceTechAuthority: "John Doe",
+TechAuhtorityPhone:"5143769087",
+TechManagerServiceEmail:"yahoo@email",
+user: user,
+address:address)
 
 
 building=Building.create!(
@@ -293,10 +315,10 @@ EmailOfTheAdministratorOfTheBuilding: "Nicolas@chose",
 PhoneNumberOfTheBuildingAdministrator: "418-652-8569",
 FullNameOfTheTechContactForTheBuilding: "njohn connor",
 TechContactEmail: "john@chose",
-TechContactPhone: "452-625-5455"
-customer: building)
+TechContactPhone: "452-625-5455",
+customer: customer)
 
 building1 = BuildingDetail.create!(
 InformationKey: "type",
-Value: "Commercial"
-building: building1)
+Value: "Commercial",
+building: building)
