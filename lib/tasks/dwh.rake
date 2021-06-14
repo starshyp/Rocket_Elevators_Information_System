@@ -1,7 +1,7 @@
 namespace :dwh do
 
   desc 'My import task'
-
+  require "pg"
 
   task :connection_mysql do
     mysql = ActiveRecord::Base.establish_connection(Rails.configuration.database_configuration["development"])
@@ -9,29 +9,28 @@ namespace :dwh do
   end
 
   task :connection_postgres  do 
-    postgre=ActiveRecord::Base.establish_connection(
-      host: "localhost",
-      username: "postgres",
-      password: "postgres",
-      adapter: "postgresql",
-      encoding: "unicode",
-      database: "datawarehouse_development")
-      puts postgre.connection.current_database
+    conn = PG.connect( dbname: 'datawarehouse_development', password: 'postgres'
+    )
+    puts conn
+  end
+
+  task import: :environment do
+    conn = PG.connect( dbname: 'datawarehouse_development', password: 'postgres'
+    )
+    conn.exec( 'INSERT INTO fact_quotes (QuoteId, column2, column3, ...)
+    SELECT column1, column2, column3, ...
+    FROM table1' ) do |result|
+      puts "     PID | User             | Query"
+      result.each do |row|
+        puts " %7d | %-16s | %s " %
+          row.values_at('pid', 'usename', 'query')
+      end
     end
+    # Employee.find_each do |lu|
+    #   puts "#{lu.id} - #{lu.FirstName}"
+    # end
   end
 
-  task :import do
-    
-
-    Quote.all.each do |q|
-      q.
-      #res.user.name+","+res.concert.name+","+res.concert.date # etc.
-   end
-  end
-
-
-  desc "TODO"
   task my_task2: :environment do
   end
-
 end
