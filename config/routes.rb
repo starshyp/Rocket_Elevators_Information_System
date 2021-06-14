@@ -16,4 +16,6 @@ Rails.application.routes.draw do
 	devise_for :users     
 
 	post "/quotes/create", to: "quotes#create"
+
+	post "/leads/create", to: "leads#create"
 end
