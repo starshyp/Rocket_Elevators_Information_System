@@ -10,7 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_11_152432) do
+ActiveRecord::Schema.define(version: 2021_06_14_220431) do
+
+  create_table "buildings", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "FullNameOfTheBuildingAdministrator"
+    t.string "EmailOfTheAdministratorOfTheBuilding"
+    t.string "PhoneNumberOfTheBuildingAdministrator"
+    t.string "FullNameOfTheTechContactForTheBuilding"
+    t.string "TechContactEmail"
+    t.string "TechContactPhone"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_buildings_on_user_id"
+  end
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "FirstName"
@@ -76,5 +89,6 @@ ActiveRecord::Schema.define(version: 2021_06_11_152432) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "buildings", "users"
   add_foreign_key "employees", "users"
 end

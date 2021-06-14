@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :buildings
   resources :quotes
 	root "rocket#index"
   
