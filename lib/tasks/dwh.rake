@@ -15,11 +15,10 @@ namespace :dwh do
   end
   
   task import: :environment do
-    conn = PG.connect( dbname: 'datawarehouse_development', password: 'postgres'
-    )
+    conn = PG.connect( dbname: 'datawarehouse_development', password: 'postgres')
     Employee.find_each do |lu|
-      conn.exec("INSERT INTO fact_quotes \("quoteid\") VALUES #{lu.user_id}") 
-      
+      puts lu.user_id
+      conn.exec("INSERT INTO fact_quotes (\"QuoteId\") VALUES (#{lu.user_id})")
     end
     # Employee.find_each do |lu|
     #   puts "#{lu.id} - #{lu.FirstName}"
