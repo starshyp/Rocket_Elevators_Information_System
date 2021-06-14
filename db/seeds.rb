@@ -351,7 +351,7 @@ entity = ["Customer", "Building"];
 file = File.read('addresses.json')
 addr = JSON.parse(file)
 nbAddr = addr["Address"].size-1
-status = ["Active, Inactive"];
+status = ["Active", "Inactive"];
 
 
 for i in 0..nbAddr  # Temp Loop Adress***************************
@@ -374,10 +374,10 @@ end
 nbUser = User.count
 # nbAddress = Address.count
 
-for _ in 1..50 # Loop Customer*********************
+for i in 1..(nbAddr/2).floor # Loop Customer*********************
   customers = Customer.create!(
     user: User.find(rand(User.count)+1),
-    address: address,
+    address: Address.find(i),
     CompanyName: Faker::Company.name,
     NameOfContact: Faker::Name.name,
     CompanyContactPhone: Faker::PhoneNumber.cell_phone,
@@ -393,8 +393,11 @@ end
 # nbCostumer = Customer.count
 # nbBuilding = Building.count
 
-for _ in 1..50   # Loop Building*******************
+informationKeys = ["number of floors", "type", "architecture", "maximum number of occupants", "year of construction"]
+architecture = ["Classic", "Neoclassic", "Industriel", "Bauhaus", "Modern"]
+for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
   building = Building.create!(
+    address_id: Address.find(i).id,
     customer: Customer.find(rand(Customer.count)+1),
     FullNameOfTheBuildingAdministrator: Faker::Name.name,
     EmailOfTheAdministratorOfTheBuilding: Faker::Internet.email,
@@ -403,14 +406,33 @@ for _ in 1..50   # Loop Building*******************
     TechContactEmail: Faker::Internet.email,
     TechContactPhone: Faker::PhoneNumber.cell_phone
   )
-  puts building
+  # Address.find(i)[:Entity] = "Building"
 
-  buildingDetail = BuildingDetail.create!( #BuildingDetail in Loop Building ******************
+  puts building
+  iKeyShuffle = informationKeys.shuffle
+  for i in 1..rand(5)
+    iKey = iKeyShuffle[i-1]
+    iKeyValue = nil
+    case iKey
+    when "number of floors"
+      iKeyValue = rand(60)
+    when "type"
+      iKeyValue = departements.sample
+    when "architecture"
+      iKeyValue = architecture.sample
+    when "maximum number of occupants"
+      iKeyValue = rand(200)
+    when "year of construction"
+      iKeyValue = rand(2018..2021)
+    end
+    buildingDetail = BuildingDetail.create!( #BuildingDetail in Loop Building ******************
     building: building,
-    InformationKey: Faker::Drone.name,
-    Value: Faker::Drone.weight
+    InformationKey: iKey,
+    Value: iKeyValue
   )
   puts buildingDetail
+
+  end
 
   # nbEmployee = Employee.count
 
@@ -446,7 +468,7 @@ for _ in 1..50   # Loop Building*******************
         elevator = Elevator.create!(
           column_id: column.id,
           SerialNumber: Faker::Vehicle.vin,
-          Model: Faker::Movies::StarWars.droid,
+          Model: Faker::Vehicle.model,
           ElevatorType: departements.sample,
           Status: "on",
           DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),

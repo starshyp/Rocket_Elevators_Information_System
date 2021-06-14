@@ -23,6 +23,14 @@ class QuotesController < ApplicationController
   def create
     @quote = Quote.new(quote_params)
 
+    if user_signed_in?
+      userCustomerList = Customer.where(:user_id => current_user.id)
+      if userCustomerList.present?
+        @quote.CompanyName = userCustomerList.first.CompanyName
+        @quote.Email = userCustomerList.first.EmailOfTheCompany
+      end
+    end
+
     respond_to do |format|
       if @quote.save
         format.html { redirect_to @quote, notice: "Quote was successfully created." }
