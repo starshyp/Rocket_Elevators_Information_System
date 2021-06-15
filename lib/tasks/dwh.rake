@@ -24,6 +24,21 @@ namespace :dwh do
     # end
   end
 
-  task my_task2: :environment do
+  task factquotes: :environment do
+    conn = PG.connect( dbname: 'datawarehouse_development', password: 'postgres')
+    # Quote.find_each do |q|
+    #  # puts q.user_id
+    #   conn.exec("INSERT INTO fact_quotes (\"QuoteId\") VALUES (#{q.id})")
+    #   conn.exec("INSERT INTO fact_quotes (\"Creation\") VALUES (#{q.created_at})")
+    #   conn.exec("INSERT INTO fact_quotes (\"CompanyName\") VALUES (#{q.CompanyName})")
+    #   conn.exec("INSERT INTO fact_quotes (\"Email\") VALUES (#{q.Email})")
+    #   conn.exec("INSERT INTO fact_quotes (\"NbElevator\") VALUES (#{q.ElevatorAmount})")
+    conn.prepare("quote", 'INSERT INTO fact_quotes ("QuoteId", "Creation", "CompanyName", "Email", "NbElevator") VALUES ($1, $2, $3, $4, $5)')
+    Quote.find_each do |index|
+      puts index.id
+      conn.exec_prepared("quote", [index.id, index.created_at, index.CompanyName, index.Email, index.ElevatorAmount])
+    end
   end
 end
+
+    

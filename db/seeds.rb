@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -8,8 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require "faker"
 
-=======
->>>>>>> 1e7697ed9457341b12655ae600bacca6aed6246f
 Employee.destroy_all
 User.destroy_all
 
@@ -322,6 +319,8 @@ for _ in 1..25
     ElevatorUnitCost: unitcost.sample,
     ElevatorTotalCost: rand(60000),
     InstallationCost: rand(20000),
+    Email:Faker::Internet.email,
+    CompanyName:Faker::Company.name,
     TotalPrice: rand(100000)
   )
 end
