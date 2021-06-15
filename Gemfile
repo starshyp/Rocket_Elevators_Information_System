@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.6'
 
 gem 'cancancan'
+gem 'faker'
 gem 'rolify'
 gem 'devise'
 gem 'rails_admin', '~> 2.0'
