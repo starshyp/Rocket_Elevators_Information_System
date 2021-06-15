@@ -285,4 +285,18 @@ LastName: "Murray",
 Email: "jonathan.murray@codeboxx.biz",
 user: user)
                                                           
-     
+
+
+building=Building.create!(
+FullNameOfTheBuildingAdministrator: "john",
+EmailOfTheAdministratorOfTheBuilding: "Nicolas@chose",
+PhoneNumberOfTheBuildingAdministrator: "418-652-8569",
+FullNameOfTheTechContactForTheBuilding: "njohn connor",
+TechContactEmail: "john@chose",
+TechContactPhone: "452-625-5455"
+customer: building)
+
+building1 = BuildingDetail.create!(
+InformationKey: "type",
+Value: "Commercial"
+building: building1)
