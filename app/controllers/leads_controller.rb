@@ -25,6 +25,7 @@ class LeadsController < ApplicationController
   # POST /leads or /leads.json
   def create
     @lead = Lead.new(lead_params)
+    @lead.DateOfRequest = Time.now
 
     respond_to do |format|
       if @lead.save
