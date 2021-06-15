@@ -284,7 +284,29 @@ FirstName: "Jonathan",
 LastName: "Murray",
 Email: "jonathan.murray@codeboxx.biz",
 user: user)
-                                                          
+
+require 'faker'
+Faker::Config.locale = 'en'
+
+types = ["Billing", "Shipping", "Home", "Business"];
+
+for _ in 0..500
+  fakedAddress = Faker::Address;
+  address=Address.create!(
+    TypeOfAddress: types.sample,
+    Status: fakedAddress.state_abbr,
+    Entity: "government",
+    NumberAndStreet: fakedAddress.street_address,
+    Apt: fakedAddress.street_address,
+    City: fakedAddress.city,
+    PostalCode: fakedAddress.postcode,
+    Country: fakedAddress.country,
+    Notes:"bdsjfhggfhsdfbdggeihigigheibivgdufbdjguiogfneklfhgfldfkldgfklfbsdklfgdkfgbdiogp"
+  )
+  puts fakedAddress
+  puts address
+end
+
 # address=Address.create!(
 # TypeOfAddress: "donnnow",
 # Status: "ON",
