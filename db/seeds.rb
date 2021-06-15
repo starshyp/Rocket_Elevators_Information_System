@@ -333,8 +333,7 @@ require "faker"
 for _ in 0..500
   lead = Lead.create!(
     
-    FullName: %w[George John Chose Sergei].name,
-    # FullName: Faker::Name.name,
+    FullName: Faker::Name.name,
     CompanyName: Faker::Company.name,
     Email: Faker::Internet.email,
     Phone: Faker::PhoneNumber.cell_phone,
@@ -344,9 +343,7 @@ for _ in 0..500
     Message: Faker::Movies::StarWars.wookiee_sentence,
     AttachedFile: Faker::File.extension,
     DateOfRequest: Faker::Date.between(from: '2021-06-15', to: '2021-12-30')
-
   )
-
   puts lead
   
 end
