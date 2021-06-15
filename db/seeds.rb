@@ -330,10 +330,23 @@ user: user)
 
 require "faker"
 
-5.times do
-  # name = Faker::Name.name
-  # email = Faker::Internet.email(name:)
-  # phone = Faker::PhoneNumber.cell_phone
-  FullNameOfTheBuildingAdministrator: Faker::Name.name
-  EmailOfTheAdministratorOfTheBuilding: Faker::Internet.email(name:)
-  PhoneNumberOfTheBuildingAdministrator: Faker::PhoneNumber.cell_phone
+for _ in 0..500
+  lead = Lead.create!(
+    
+    FullName: %w[George John Chose Sergei].name,
+    # FullName: Faker::Name.name,
+    CompanyName: Faker::Company.name,
+    Email: Faker::Internet.email,
+    Phone: Faker::PhoneNumber.cell_phone,
+    ProjectName: Faker::Name.name,
+    ProjectDescription: Faker::Movies::StarWars.quote,
+    Departement: Faker::Movies::StarWars.planet,
+    Message: Faker::Movies::StarWars.wookiee_sentence,
+    AttachedFile: Faker::File.extension,
+    DateOfRequest: Faker::Date.between(from: '2021-06-15', to: '2021-12-30')
+
+  )
+
+  puts lead
+  
+end
