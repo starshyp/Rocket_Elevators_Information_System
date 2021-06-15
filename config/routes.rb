@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  resources :leads
+  resources :elevators
+  resources :columns
+  resources :batteries
+  resources :customers
+  resources :addresses
   resources :building_details
   resources :buildings
   resources :quotes
@@ -17,4 +23,6 @@ Rails.application.routes.draw do
 	devise_for :users     
 
 	post "/quotes/create", to: "quotes#create"
+
+	post "/leads/create", to: "leads#create"
 end
