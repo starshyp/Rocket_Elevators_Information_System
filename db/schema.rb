@@ -10,9 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2021_06_14_143508) do
-=======
 ActiveRecord::Schema.define(version: 2021_06_15_145219) do
 
   create_table "addresses", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -110,7 +107,6 @@ ActiveRecord::Schema.define(version: 2021_06_15_145219) do
     t.bigint "columns_id"
     t.index ["columns_id"], name: "index_elevators_on_columns_id"
   end
->>>>>>> c9a4a189dafb8beaf4c25ed2f4debd2cdaaf3f6b
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "FirstName"
