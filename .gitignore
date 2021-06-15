@@ -9,9 +9,6 @@
 
 /config/database.yml
 
-# Ignore the generated schema.rb
-db/schema.rb
-
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*
