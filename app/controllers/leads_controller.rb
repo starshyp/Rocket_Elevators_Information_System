@@ -3,7 +3,8 @@ class LeadsController < ApplicationController
 
   # GET /leads or /leads.json
   def index
-    @leads = Lead.all
+    redirect_to "/index"
+    # @leads = Lead.all
   end
 
   # GET /leads/1 or /leads/1.json
@@ -12,17 +13,19 @@ class LeadsController < ApplicationController
 
   # GET /leads/new
   def new
+    redirect_to "/index"
     @lead = Lead.new
   end
 
   # GET /leads/1/edit
   def edit
+    redirect_to "/index"
   end
 
   # POST /leads or /leads.json
   def create
     @lead = Lead.new(lead_params)
-    
+
     respond_to do |format|
       if @lead.save
         format.html { redirect_to "/index", notice: "Lead was successfully created." }
@@ -36,6 +39,7 @@ class LeadsController < ApplicationController
 
   # PATCH/PUT /leads/1 or /leads/1.json
   def update
+    redirect_to "/index"
     respond_to do |format|
       if @lead.update(lead_params)
         format.html { redirect_to @lead, notice: "Lead was successfully updated." }
@@ -49,11 +53,12 @@ class LeadsController < ApplicationController
 
   # DELETE /leads/1 or /leads/1.json
   def destroy
-    @lead.destroy
-    respond_to do |format|
-      format.html { redirect_to leads_url, notice: "Lead was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to "/index"
+    # @lead.destroy
+    # respond_to do |format|
+    #   format.html { redirect_to leads_url, notice: "Lead was successfully destroyed." }
+    #   format.json { head :no_content }
+    # end
   end
 
   private
