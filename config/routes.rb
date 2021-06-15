@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   resources :leads
+  resources :elevators
+  resources :columns
+  resources :batteries
+  resources :customers
+  resources :addresses
+  resources :building_details
+  resources :buildings
   resources :quotes
 	root "rocket#index"
   
