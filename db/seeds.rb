@@ -294,9 +294,20 @@ PhoneNumberOfTheBuildingAdministrator: "418-652-8569",
 FullNameOfTheTechContactForTheBuilding: "njohn connor",
 TechContactEmail: "john@chose",
 TechContactPhone: "452-625-5455"
-customer: building)
+customer: customer)
 
 building1 = BuildingDetail.create!(
 InformationKey: "type",
 Value: "Commercial"
-building: building1)
+building: building)
+
+
+require "faker"
+
+5.times do
+  # name = Faker::Name.name
+  # email = Faker::Internet.email(name:)
+  # phone = Faker::PhoneNumber.cell_phone
+  FullNameOfTheBuildingAdministrator: Faker::Name.name
+  EmailOfTheAdministratorOfTheBuilding: Faker::Internet.email(name:)
+  PhoneNumberOfTheBuildingAdministrator: Faker::PhoneNumber.cell_phone
