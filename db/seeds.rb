@@ -330,10 +330,10 @@ user: user)
 
 require "faker"
 
-for _ in 0..500
+for _ in 0..10
   lead = Lead.create!(
     
-    FullName: Faker::Name.name,
+    FullName: Faker::Movies::StarWars.character,
     CompanyName: Faker::Company.name,
     Email: Faker::Internet.email,
     Phone: Faker::PhoneNumber.cell_phone,
@@ -346,4 +346,56 @@ for _ in 0..500
   )
   puts lead
   
+end
+
+for _ in 0..10
+  battery = Battery.create!(
+
+    # buiding_params = ActiveSupport::JSON.decode(building[:column])
+    # BuildingId: building_params[:id],
+    # BType: building_params[:Type],
+    BType: Faker::Movies::StarWars.planet,
+    DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
+    DateOfLastInspection: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
+    CertificateOfOperations: Faker::FunnyName.name ,
+    Info:Faker::Movies::StarWars.quote,
+    Notes:Faker::Movies::StarWars.wookiee_sentence
+  )
+  puts battery
+end
+
+
+for _ in 0..10
+  column = Column.create!(
+
+    # battery_params = ActiveSupport::JSON.decode(params[:battery])
+    # BatteryId: battery_params[:id], 
+    # ColumnType: battery_params[:BType],
+    ColumnType: Faker::Movies::StarWars.planet,
+    NbOfFloorsServed: 1,
+    Status: Faker::FunnyName.name ,
+    Info:Faker::Movies::StarWars.quote,
+    Notes:Faker::Movies::StarWars.wookiee_sentence
+  )
+  puts column
+end
+
+
+for _ in 0..10
+  elevator = Elevator.create!(
+
+    # column_params = ActiveSupport::JSON.decode(params[:column])
+    # ColumnId: column_params[:id],
+    SerialNumber: Faker::Vehicle.vin,
+    Model: Faker::Movies::StarWars.droid, 
+    # ElevatorType: column_params[:ColumnType],
+    ElevatorType: Faker::Movies::StarWars.planet,
+    Status: "on",
+    DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
+    DateOfLastInspection: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
+    CertificateOfInspection: Faker::FunnyName.name ,
+    Info:Faker::Movies::StarWars.quote,
+    Notes:Faker::Movies::StarWars.wookiee_sentence
+  )
+  puts elevator
 end
