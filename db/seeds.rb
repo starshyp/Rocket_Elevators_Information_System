@@ -285,70 +285,143 @@ LastName: "Murray",
 Email: "jonathan.murray@codeboxx.biz",
 user: user)
 
-
+for _ in 1..50 # Loop User*********************
+  customers = User.create!(
+    email: Faker::Internet.email,
+    password:"codeboxx",
+    password_confirmation:"codeboxx")
+  end
 
 # Address Faker Rayan
 require 'faker'
 Faker::Config.locale = 'en'
 
-types = ["Billing", "Shipping", "Home", "Business"];
+departements = ["Residential", "Commercial", "Corporate", "Hybrid"]
 
-for _ in 0..500
+for _ in 1..10  # Loop Lead ******************************
+  lead = Lead.create!(
+    FullName: Faker::Name.name,
+    CompanyName: Faker::Company.name,
+    Email: Faker::Internet.email,
+    Phone: Faker::PhoneNumber.cell_phone,
+    ProjectName: Faker::Commerce.product_name,
+    ProjectDescription: Faker::Lorem.sentence(word_count: 3),
+    Departement: departements.sample,
+    Message: Faker::Lorem.sentence(word_count: 3),
+    AttachedFile: Faker::File.extension,
+    DateOfRequest: Faker::Date.between(from: '2021-06-15', to: '2021-12-30')
+  )
+  puts lead
+end
+
+types = ["Billing", "Shipping", "Home", "Business"];
+entity = ["Customer", "Building"];
+
+for _ in 1..100  # Temp Loop Adress***************************
   fakedAddress = Faker::Address;
-  address=Address.create!(
+  address = Address.create!(
     TypeOfAddress: types.sample,
     Status: fakedAddress.state_abbr,
-    Entity: "government",
+    Entity: entity.sample,
     NumberAndStreet: fakedAddress.street_address,
     Apt: fakedAddress.street_address,
     City: fakedAddress.city,
     PostalCode: fakedAddress.postcode,
     Country: fakedAddress.country,
-    Notes:"bdsjfhggfhsdfbdggeihigigheibivgdufbdjguiogfneklfhgfldfkldgfklfbsdklfgdkfgbdiogp"
+    Notes: Faker::Lorem.sentence(word_count: 3)
   )
   puts fakedAddress
   puts address
 end
 
-# address=Address.create!(
-# TypeOfAddress: "donnnow",
-# Status: "ON",
-# Entity: "government",
-# NumberAndStreet: "24 Kingston",
-# Apt: "67",
-# City: "Montreal",
-# PostalCode:"j78h65",
-# Country:"Canada",
-# Notes:"bdsjfhggfhsdfbdggeihigigheibivgdufbdjguiogfneklfhgfldfkldgfklfbsdklfgdkfgbdiogp")
+# Faker::Number.unique.between(from: 1, to: 21)
+# if value.between?(lower, higher) (10..20).member?(14)
+nbUser = User.count
+# nbAddress = Address.count
 
-# customer=Customer.create!(
-# CompanyName: "johnINC",
-# NameOfContact: "Nicolas",
-# CompanyContactPhone: "78918-652-8569",
-# EmailOfTheCompany: "njohn connor@chose",
-# CompanyDescription: "johjdjffdbidhdiphdkfdighgndipghd;kgdgiphg;kgnipghgipghgegiehgeihgioglgseoighesip",
-# NameOfServiceTechAuthority: "John Doe",
-# TechAuhtorityPhone:"5143769087",
-# TechManagerServiceEmail:"yahoo@email",
-# user: user,
-# address:address)
+for _ in 1..50 # Loop Customer*********************
+  customers = Customer.create!(
+    user: User.find(rand(User.count)+1),
+    address: address,
+    CompanyName: Faker::Company.name,
+    NameOfContact: Faker::Name.name,
+    CompanyContactPhone: Faker::PhoneNumber.cell_phone,
+    EmailOfTheCompany: Faker::Internet.email,
+    CompanyDescription: Faker::Lorem.sentence(word_count: 3),
+    NameOfServiceTechAuthority: Faker::Name.name,
+    TechAuhtorityPhone: Faker::PhoneNumber.cell_phone,
+    TechManagerServiceEmail: Faker::Internet.email
+  )
+  puts customers
+end
 
+# nbCostumer = Customer.count
+# nbBuilding = Building.count
 
-# building=Building.create!(
-# FullNameOfTheBuildingAdministrator: "john",
-# EmailOfTheAdministratorOfTheBuilding: "Nicolas@chose",
-# PhoneNumberOfTheBuildingAdministrator: "418-652-8569",
-# FullNameOfTheTechContactForTheBuilding: "njohn connor",
-# TechContactEmail: "john@chose",
-# TechContactPhone: "452-625-5455",
-# customer: customer)
+for _ in 1..50   # Loop Building*******************
+  building = Building.create!(
+    customer: Customer.find(rand(Customer.count)+1),
+    FullNameOfTheBuildingAdministrator: Faker::Name.name,
+    EmailOfTheAdministratorOfTheBuilding: Faker::Internet.email,
+    PhoneNumberOfTheBuildingAdministrator: Faker::PhoneNumber.cell_phone,
+    FullNameOfTheTechContactForTheBuilding: Faker::Name.name,
+    TechContactEmail: Faker::Internet.email,
+    TechContactPhone: Faker::PhoneNumber.cell_phone
+  )
+  puts building
 
-# building1 = BuildingDetail.create!(
-# InformationKey: "type",
-# Value: "Commercial",
-# building: building)
+  buildingDetail = BuildingDetail.create!( #BuildingDetail in Loop Building ******************
+    building: building,
+    InformationKey: Faker::Drone.name,
+    Value: Faker::Drone.weight
+  )
+  puts buildingDetail
 
-# battery=Battery.create!(
-# CertificateOfOperations: "jnkluiuiuiuoouiuuiuouiuo",
-# Info: "opoo",
-# Notes:"bdsjfhggfhsdfbdggeihigigheibivgdufbdjguiogfneklfhgfldfkldgfklfbsdklfgdkfgbdiogp")
+  # nbEmployee = Employee.count
+
+  for _ in 1..1   # Loop Battery in Building *************************
+  batteries = Battery.create!(
+    building: building,
+    BType: departements.sample,
+    employee_id: employees.id,
+    DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
+    DateOfLastInspection: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
+    CertificateOfOperations: Faker::FunnyName.name,
+    Info:Faker::Lorem.sentence(word_count: 3),
+    Notes: Faker::Lorem.sentence(word_count: 3)
+  )
+  puts batteries
+
+  # nbBattery = Battery.count
+
+    for _ in 1..3  # Loop Column in Battery *********************
+      column = Column.create!(
+        battery_id: batteries.id,
+        ColumnType: departements.sample,
+        NbOfFloorsServed: 1,
+        Status: "on",
+        Info: Faker::Lorem.sentence(word_count: 3),
+        Notes: Faker::Lorem.sentence(word_count: 3)
+      )
+      puts column
+
+      # nbColumn = Column.count
+
+      for _ in 1..4  #Loop Elevator in Column **********************
+        elevator = Elevator.create!(
+          column_id: column.id,
+          SerialNumber: Faker::Vehicle.vin,
+          Model: Faker::Movies::StarWars.droid,
+          ElevatorType: departements.sample,
+          Status: "on",
+          DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
+          DateOfLastInspection: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
+          CertificateOfInspection: Faker::FunnyName.name ,
+          Info: Faker::Lorem.sentence(word_count: 3),
+          Notes: Faker::Lorem.sentence(word_count: 3)
+        )
+        puts elevator
+      end
+    end
+  end
+end
