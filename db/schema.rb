@@ -35,10 +35,10 @@ ActiveRecord::Schema.define(version: 2021_06_15_145219) do
     t.text "Notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "buildings_id"
-    t.bigint "employees_id"
-    t.index ["buildings_id"], name: "index_batteries_on_buildings_id"
-    t.index ["employees_id"], name: "index_batteries_on_employees_id"
+    t.bigint "building_id"
+    t.bigint "employee_id"
+    t.index ["building_id"], name: "index_batteries_on_building_id"
+    t.index ["employee_id"], name: "index_batteries_on_employee_id"
   end
 
   create_table "building_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -71,8 +71,8 @@ ActiveRecord::Schema.define(version: 2021_06_15_145219) do
     t.text "Notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "batteries_id"
-    t.index ["batteries_id"], name: "index_columns_on_batteries_id"
+    t.bigint "battery_id"
+    t.index ["battery_id"], name: "index_columns_on_battery_id"
   end
 
   create_table "customers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -104,8 +104,8 @@ ActiveRecord::Schema.define(version: 2021_06_15_145219) do
     t.text "Notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "columns_id"
-    t.index ["columns_id"], name: "index_elevators_on_columns_id"
+    t.bigint "column_id"
+    t.index ["column_id"], name: "index_elevators_on_column_id"
   end
 
   create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -187,13 +187,13 @@ ActiveRecord::Schema.define(version: 2021_06_15_145219) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
-  add_foreign_key "batteries", "buildings", column: "buildings_id"
-  add_foreign_key "batteries", "employees", column: "employees_id"
+  add_foreign_key "batteries", "buildings"
+  add_foreign_key "batteries", "employees"
   add_foreign_key "building_details", "buildings"
   add_foreign_key "buildings", "customers"
-  add_foreign_key "columns", "batteries", column: "batteries_id"
+  add_foreign_key "columns", "batteries"
   add_foreign_key "customers", "addresses"
   add_foreign_key "customers", "users"
-  add_foreign_key "elevators", "columns", column: "columns_id"
+  add_foreign_key "elevators", "columns"
   add_foreign_key "employees", "users"
 end
