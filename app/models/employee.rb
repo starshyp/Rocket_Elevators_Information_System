@@ -1,4 +1,4 @@
 class Employee < ApplicationRecord 
     belongs_to :user
-    has_many :Battery
+    has_many :batteries
 end
