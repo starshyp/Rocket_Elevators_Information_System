@@ -13,6 +13,13 @@ namespace :dwh do
     puts conn
   end
   
+  task clear: :environment do
+    conn = PG.connect( dbname: 'datawarehouse_development', password: 'postgres')
+    puts "Clearing DWL data structure"
+    conn.exec("TRUNCATE fact_quotes, fact_contacts, fact_elevators, dim_customers")
+    puts "Cleared DWL data structure"
+  end
+  
   desc "Import from MySQL data to Postgres"
   task import: :environment do
     conn = PG.connect( dbname: 'datawarehouse_development', password: 'postgres')
