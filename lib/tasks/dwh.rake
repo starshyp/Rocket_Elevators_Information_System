@@ -15,16 +15,16 @@ namespace :dwh do
 
   task clear: :environment do
     conn = PG.connect( dbname: 'datawarehouse_development', password: 'postgres')
-    puts "Clearing DWL data structure"
+    puts "Clearing DWH data structure"
     conn.exec("TRUNCATE fact_quotes, fact_contacts, fact_elevators, dim_customers")
-    puts "Cleared DWL data structure"
+    puts "Cleared DWH data structure"
   end
   
   desc "Import from MySQL data to Postgres"
   task import: :environment do
     Rake::Task["dwh:clear"].invoke()
     conn = PG.connect( dbname: 'datawarehouse_development', password: 'postgres')
-    puts "Rebuilding DWL data structure"
+    puts "Rebuilding DWH data structure"
 
     puts "    Building fact_quotes data structure"
     conn.prepare("factquote", 'INSERT INTO fact_quotes ("QuoteId", "Creation", "CompanyName", "Email", "NbElevator") VALUES ($1, $2, $3, $4, $5)')
