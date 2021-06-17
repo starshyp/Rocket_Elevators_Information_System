@@ -1,12 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-
 Employee.destroy_all
 User.destroy_all
 
@@ -289,12 +280,40 @@ for _ in 1..50 # Loop User*********************
   customers = User.create!(
     email: Faker::Internet.email,
     password:"codeboxx",
-    password_confirmation:"codeboxx")
-  end
+    password_confirmation:"codeboxx"
+  )
+end
 
-# Address Faker Rayan
 require 'faker'
 Faker::Config.locale = 'en'
+departements = ["Residential", "Commercial", "Corporate", "Hybrid"]
+productline = ["standard", "premium", "excelium"]
+unitcost = [7565, 12345, 15400]
+
+# Fake Quotes FOR DB TESTING, NOT REALISTIC, DOES NOT RESPECT CALCULATIONS
+##########################################################
+for _ in 1..25
+  quotes = Quote.create!(
+    BuildingType: departements.sample,
+    NumberOfFloors: rand(50),
+    NumberOfBasements: rand(2),
+    NumberOfcompanies: rand(10),
+    NumberOfParkingSpots: rand(50),
+    NumberOfElevators: rand(50),
+    NumberOfApartments: rand(300),
+    NumberOfCorporations: rand(10),
+    NumberOfOccupany: rand(300),
+    NumberOfBusinessHours: rand(18),
+    ElevatorAmount: rand(50),
+    ColumnAmount: rand(50),
+    ProductLine: productline.sample,
+    ElevatorUnitCost: unitcost.sample,
+    ElevatorTotalCost: rand(60000),
+    InstallationCost: rand(20000),
+    TotalPrice: rand(100000)
+  )
+end
+###########################################################
 
 departements = ["Residential", "Commercial", "Corporate", "Hybrid"]
 
@@ -317,20 +336,24 @@ end
 types = ["Billing", "Shipping", "Home", "Business"];
 entity = ["Customer", "Building"];
 
-for _ in 1..100  # Temp Loop Adress***************************
-  fakedAddress = Faker::Address;
+file = File.read('addresses.json')
+addr = JSON.parse(file)
+nbAddr = addr["Address"].size-1
+status = ["Active, Inactive"];
+
+
+for i in 0..nbAddr  # Temp Loop Adress***************************
   address = Address.create!(
     TypeOfAddress: types.sample,
-    Status: fakedAddress.state_abbr,
+    Status: status.sample,
     Entity: entity.sample,
-    NumberAndStreet: fakedAddress.street_address,
-    Apt: fakedAddress.street_address,
-    City: fakedAddress.city,
-    PostalCode: fakedAddress.postcode,
-    Country: fakedAddress.country,
+    NumberAndStreet: addr["Address"][i]["NumberAndStreet"],
+    Apt: addr["Address"][i]["Apt"],
+    City: addr["Address"][i]["City"],
+    PostalCode: addr["Address"][i]["PostalCode"],
+    Country: addr["Address"][i]["Country"],
     Notes: Faker::Lorem.sentence(word_count: 3)
   )
-  puts fakedAddress
   puts address
 end
 
