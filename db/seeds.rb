@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
 #
@@ -8,8 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require "faker"
 
-=======
->>>>>>> 1e7697ed9457341b12655ae600bacca6aed6246f
 Employee.destroy_all
 User.destroy_all
 
@@ -350,11 +347,11 @@ entity = ["Customer", "Building"];
 
 file = File.read('addresses.json')
 addr = JSON.parse(file)
-nbAddr = addr["Address"].size-1
+nbAddr = addr["Address"].size
 status = ["Active", "Inactive"];
 
 
-for i in 0..nbAddr  # Temp Loop Adress***************************
+for i in 0..(nbAddr-1)  # Temp Loop Adress***************************
   address = Address.create!(
     TypeOfAddress: types.sample,
     Status: status.sample,
