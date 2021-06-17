@@ -18,6 +18,7 @@ namespace :dwh do
     conn = PG.connect( dbname: 'datawarehouse_development', password: 'postgres'
     )
     Employee.find_each do |lu|
+      puts lu.user_id
       conn.exec(`INSERT INTO fact_quotes ("quoteid") VALUES #{lu.user_id}`) 
       
     end
