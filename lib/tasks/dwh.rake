@@ -30,7 +30,7 @@ namespace :dwh do
   desc "Import from MySQL data to Postgres"
   task import: :environment do
     Rake::Task["dwh:clear"].invoke()
-    conn = PG.connect( dbname: 'AlexisBTrepanierDataWarehouse', password: 'Codeboxx1!')
+    conn = PG.connect( host: 'codeboxx-postgresql.cq6zrczewpu2.us-east-1.rds.amazonaws.com', dbname: 'AlexisBTrepanierDataWarehouse', password: 'Codeboxx1!')
     puts "Rebuilding DWH data structure"
 
     puts "    Building fact_quotes data structure"
