@@ -319,6 +319,8 @@ for _ in 1..25
     ElevatorUnitCost: unitcost.sample,
     ElevatorTotalCost: rand(60000),
     InstallationCost: rand(20000),
+    Email:Faker::Internet.email,
+    CompanyName:Faker::Company.name,
     TotalPrice: rand(100000)
   )
 end
