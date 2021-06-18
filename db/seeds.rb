@@ -439,7 +439,7 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
   batteries = Battery.create!(
     building: building,
     BType: departements.sample,
-    employee_id: employees.id,
+    employee_id: Employee.find(rand(Employee.count)+1).id,
     DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
     DateOfLastInspection: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
     CertificateOfOperations: Faker::FunnyName.name,
