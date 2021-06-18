@@ -25,7 +25,7 @@
 * Seeding: 21 users(with the password of "codeboxx") & employees, 25 quote forms (these quotes are for the purpose of testing   the   database, the numbers inside do not respect the normal calculations), 10 leads(ContactUs forms),
     100 adresses, 50 customers, 50 building details, 50 buildings; each buildings has 1
     battery  (Total : 50 battery), each battery has 3 columns(Total : 150 columns) & each column has 4 
-    elevators (Total : 600 elevators) and a random number of building details between 1 and 5.
+    elevators (Total : 600 elevators) and a random number of building details between 0 and 5.
 
 * Admin of the site: All of the employees of Rocket Elevators havec the admin privileges so it is possible 
     to have access to the Back Office by connecting to their accounts. We used the email adress of nicolas.genest@codeboxx.biz with password codeboxx to test the website.
