@@ -12,10 +12,10 @@
     "rails db:create db:migrate db:seed"
 
 * General ProgreSQL terminal commands concerning the AlexisBTrepanierDataWarehouse database:
-    DB=datawarehouse rails db:drop
-    DB=datawarehouse rails db:create
-    DB=datawarehouse rails db:migrate
-    DB=datawarehouse rails db:seed
+    - DB=datawarehouse rails db:drop
+    - DB=datawarehouse rails db:create
+    - DB=datawarehouse rails db:migrate
+    - DB=datawarehouse rails db:seed
     
 * MySQL Tables: Users, Employees, Roles, Quotes, Leads, Address, Customers, Buildings, BuildingDetails,
     Battery, Columns & Elevarors.
