@@ -4,19 +4,23 @@ namespace :dwh do
   require "pg"
 
   task :connection_mysql do
-    mysql = ActiveRecord::Base.establish_connection(Rails.configuration.database_configuration["development"])
+    mysql = ActiveRecord::Base.establish_connection(Rails.configuration.database_configuration["datawarehouse_development"])
     puts mysql.connection.current_database
   end
 
   task :connection_postgres  do 
-    conn = PG.connect( dbname: 'AlexisBTrepanierDataWarehouse', password: 'postgres')
+    conn = PG.connect(
+      dbname: "datawarehouse_development"
+    )
     puts conn
     puts "connection postgres"
 
   end
 
   task clear: :environment do
-    conn = PG.connect(host: 'codeboxx-postgresql.cq6zrczewpu2.us-east-1.rds.amazonaws.com', user: 'codeboxx', dbname: 'AlexisBTrepanierDataWarehouse', password: 'Codeboxx1!')
+    conn = PG.connect(
+      dbname: "datawarehouse_development"
+    )
     puts "Clearing DWH data structure"
     conn.exec("TRUNCATE fact_quotes, fact_contacts, fact_elevators, dim_customers")
     puts "Cleared DWH data structure"
@@ -25,7 +29,9 @@ namespace :dwh do
   desc "Import from MySQL data to Postgres"
   task import: :environment do
     Rake::Task["dwh:clear"].invoke()
-    conn = PG.connect(host: 'codeboxx-postgresql.cq6zrczewpu2.us-east-1.rds.amazonaws.com', user: 'codeboxx', dbname: 'AlexisBTrepanierDataWarehouse', password: 'Codeboxx1!')
+    conn = PG.connect(
+      dbname: "datawarehouse_development"
+    )
     puts "Rebuilding DWH data structure"
 
     puts "    Building fact_quotes data structure"
