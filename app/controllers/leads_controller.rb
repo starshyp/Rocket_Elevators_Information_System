@@ -1,6 +1,9 @@
 class LeadsController < ApplicationController
   before_action :set_lead, only: %i[ show edit update destroy ]
 
+  require 'sendgrid-ruby'
+  include SendGrid
+
   # GET /leads or /leads.json
   def index
     redirect_to "/index"
@@ -27,8 +30,35 @@ class LeadsController < ApplicationController
     @lead = Lead.new(lead_params)
     @lead.DateOfRequest = Time.now
 
+    ######################## SENDGRID ########################
+    from = SendGrid::Email.new(email: 'rocketelevator312890@gmail.com')
+    to = SendGrid::Email.new(email: :Email.to_s)
+    subject = 'Thanks for contacting us!'
+    content = SendGrid::Content.new(
+      type: 'text/html', value:
+      '<html><body><img src="http://rocketelevators.online/assets/logo.png" width="128" height="60"><p>
+      Greetings ' + :FullName + ',<p>
+      We thank you for contacting Rocket Elevators to discuss the opportunity to contribute to your project ' + :ProjectName + '. <p>
+      A representative from our team will be in touch with you very soon. We look forward to demonstrating the value of our solutions and helping you choose the appropriate product given     your requirements. <p>
+      We’ll Talk soon <br />
+      The Rocket Team
+      </body></html>'
+    )
+    mail = SendGrid::Mail.new(from, subject, to, content)
+
+    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+    response = sg.client.mail._('send').post(request_body: mail.to_json)
+    puts response.status_code
+    puts response.body
+    puts response.parsed_body
+    puts response.headers
+    ######################## SENDGRID ########################
+
     respond_to do |format|
       if @lead.save
+        # Deliver the thank you email
+        #UserNotifierMailer.thank_you_email(@lead).deliver
+
         format.html { redirect_to "/index", notice: "Lead was successfully created." }
         format.json { render :show, status: :created, location: @lead }
       else
