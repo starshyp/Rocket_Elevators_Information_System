@@ -46,10 +46,6 @@ class ElevatorsController < ApplicationController
       end
     end
     
-    if $SlackClient then
-      $SlackClient.chat_postMessage(channel: '#elevator_operations', text: "#{@elevator.ElevatorType} Elevator #{@elevator.Model} #{@elevator.SerialNumber} Updated Info\nStatus: #{@elevator.Status}", as_user: true)
-    end
-
   end
 
   # DELETE /elevators/1 or /elevators/1.json
