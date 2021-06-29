@@ -11,6 +11,9 @@ gem 'rails_admin', '~> 2.0'
 gem 'multiverse'
 gem 'pg', '>= 0.18', '< 2.0'
 
+gem 'slack-ruby-client'
+gem 'async-websocket', '~> 0.8.0'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
 # Use mysql as the database for Active Record
