@@ -20,5 +20,18 @@ module Rocket
         $SlackClient = Slack::Web::Client.new
       end
     end
+
+    require 'zendesk_api'
+    require 'oauth2'
+
+    $client = ZendeskAPI::Client.new do |config|
+      config.url = "https://rocketelevator312891.zendesk.com/api/v2"
+      config.retry = true
+      
+      config.logger = true
+      config.username = "rocketelevator312890+@gmail.com"
+
+      config.token = ENV["ZENDESK_TOKEN"]
+    end
   end
 end

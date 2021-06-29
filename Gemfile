@@ -13,6 +13,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 
 gem 'slack-ruby-client'
 gem 'async-websocket', '~> 0.8.0'
+gem "zendesk_api"
+gem 'oauth2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
