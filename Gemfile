@@ -80,3 +80,5 @@ gem 'faker'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'sendgrid-ruby'
+gem "zendesk_api"
+gem 'ibm_watson', '~> 2.1', '>= 2.1.1'

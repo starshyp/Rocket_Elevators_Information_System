@@ -9,6 +9,9 @@
 
 /config/database.yml
 .env
+sendgrid.env
+#ibm-credentials.env
+/config/initializers/smtp.rb
 
 # Ignore all logfiles and tempfiles.
 /log/*
@@ -29,4 +32,4 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-*Zone.Identifier
+*Zone.Identifiersendgrid.env
