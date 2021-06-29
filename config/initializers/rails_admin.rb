@@ -1,6 +1,3 @@
-require "ibm_watson"
-require "ibm_watson/text_to_speech_v1"
-
 RailsAdmin.config do |config|
 
   ### Popular gems integration
@@ -10,29 +7,6 @@ RailsAdmin.config do |config|
      warden.authenticate! scope: :user
    end
    config.current_user_method(&:current_user)
-
-  ################## IBM WATSON ##################
-  # authenticator = IBMWatson::Authenticators::IamAuthenticator.new(
-  #   apikey: ENV['IBM_WATSON_API_KEY'],
-  # )
-  #
-  # watson_text_to_speech = IBMWatson::TextToSpeechV1.new(
-  #   authenticator: authenticator
-  # )
-  #
-  # watson_text_to_speech.service_url = 'https://api.us-east.text-to-speech.watson.cloud.ibm.com/instances/cb2a4acd-d5f1-43e3-bfa0-402b2d7c6934'
-  # user = User.find(:current_user)
-  # #puts JSON.pretty_generate(text_to_speech.list_voices.result)
-  # File.new("output.wav", "w+") do |audio_file|
-  #   response = watson_text_to_speech.synthesize(
-  #     text: "Hello world!",
-  #     accept: "audio/wav",
-  #     voice: "en-US_AllisonVoice"
-  #   ).result
-  #   audio_file << response
-  # end
-
-  ################## IBM WATSON ##################
 
   ## == CancanCan ==
   # config.authorize_with :cancancan
