@@ -24,14 +24,15 @@ module Rocket
     require 'zendesk_api'
     require 'oauth2'
 
-    $client = ZendeskAPI::Client.new do |config|
+    $zenclient = ZendeskAPI::Client.new do |config|
       config.url = "https://rocketelevator312891.zendesk.com/api/v2"
       config.retry = true
       
       config.logger = true
-      config.username = "rocketelevator312890+@gmail.com"
+      config.username = "rocketelevator312890@gmail.com"
 
       config.token = ENV["ZENDESK_TOKEN"]
+      config.access_token = ENV["ZENDESK_AUTH_TOKEN"]
     end
   end
 end
