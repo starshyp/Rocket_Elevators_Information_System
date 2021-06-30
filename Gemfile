@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+gem 'dotenv-rails', groups: [:development, :test]
+
 gem 'cancancan'
 gem 'faker'
 gem 'rolify'
@@ -10,6 +12,12 @@ gem 'devise'
 gem 'rails_admin', '~> 2.0'
 gem 'multiverse'
 gem 'pg', '>= 0.18', '< 2.0'
+
+gem 'slack-ruby-client'
+gem 'async-websocket', '~> 0.8.0'
+gem "zendesk_api"
+gem 'oauth2'
+gem "figaro"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
@@ -76,8 +84,10 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
+gem 'sendgrid-ruby'
+gem "zendesk_api"
+gem 'ibm_watson', '~> 2.1', '>= 2.1.1'
+
 
 gem 'twilio-ruby'
 gem 'sinatra'
-
-gem 'figaro'

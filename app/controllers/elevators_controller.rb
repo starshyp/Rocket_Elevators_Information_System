@@ -45,9 +45,6 @@ class ElevatorsController < ApplicationController
         format.json { render json: @elevator.errors, status: :unprocessable_entity }
       end
     end
-
-    
-
   end
 
   # DELETE /elevators/1 or /elevators/1.json
