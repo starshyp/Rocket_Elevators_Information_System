@@ -26,12 +26,13 @@ class QuotesController < ApplicationController
     if user_signed_in?
       userCustomerList = Customer.where(:user_id => current_user.id)
       if userCustomerList.present?
+        customer = userCustomerList.first
         @quote.CompanyName = userCustomerList.first.CompanyName
         @quote.Email = userCustomerList.first.EmailOfTheCompany
 
-        # subject = "#{@lead.FullName} from #{@lead.CompanyName}"
-        # comment = "The contact #{@lead.FullName} from company #{@lead.CompanyName} can be reached at email  #{@lead.Email} and at phone number #{@lead.Phone}. #{@lead.Departement} has a project named #{@lead.ProjectName} which would require contribution from Rocket Elevators.\n#{@lead.ProjectDescription}"
-        # ZendeskAPI::Ticket.create($zenclient, :subject => subject, :comment => { :value => comment }, :priority => "normal", :type => "question" ) # :email_ccs => [{ :user_email => :Email, :action => "put"}],
+        subject = "#{customer.NameOfContact} from #{customer.CompanyName}"
+        comment = "The contact #{customer.NameOfContact} from company #{customer.CompanyName} can be reached at email  #{customer.EmailOfTheCompany} and at phone number #{customer.CompanyContactPhone}. #{@quote.BuildingType} has a project named [PROJECT] which would require contribution from Rocket Elevators."
+        ZendeskAPI::Ticket.create($zenclient, :subject => subject, :comment => { :value => comment }, :priority => "normal", :type => "task" ) # :email_ccs => [{ :user_email => :Email, :action => "put"}],
 
       end
     end
