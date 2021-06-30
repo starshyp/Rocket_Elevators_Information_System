@@ -112,7 +112,14 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     erubi (1.10.0)
+    eventmachine (1.2.7)
     execjs (2.8.1)
     faker (2.18.0)
       i18n (>= 1.6, < 2)
@@ -131,7 +138,13 @@ GEM
     faraday-net_http_persistent (1.1.0)
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
+    faye-websocket (0.11.1)
+      eventmachine (>= 0.12.0)
+      websocket-driver (>= 0.5.1)
     ffi (1.15.1)
+    ffi-compiler (1.0.1)
+      ffi (>= 1.0.0)
+      rake
     fiber-local (1.0.0)
     gli (2.20.1)
     globalid (0.4.2)
@@ -140,8 +153,29 @@ GEM
       temple (>= 0.8.0)
       tilt
     hashie (4.1.0)
+    http (4.4.1)
+      addressable (~> 2.3)
+      http-cookie (~> 1.0)
+      http-form_data (~> 2.2)
+      http-parser (~> 1.2.0)
+    http-cookie (1.0.4)
+      domain_name (~> 0.5)
+    http-form_data (2.3.0)
+    http-parser (1.2.3)
+      ffi-compiler (>= 1.0, < 2.0)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
+    ibm_cloud_sdk_core (1.1.3)
+      concurrent-ruby (~> 1.0)
+      http (~> 4.4.0)
+      jwt (~> 2.2.1)
+    ibm_watson (2.1.1)
+      concurrent-ruby (~> 1.0)
+      eventmachine (~> 1.2)
+      faye-websocket (~> 0.11)
+      http (~> 4.4.0)
+      ibm_cloud_sdk_core (~> 1.1.3)
+      jwt (~> 2.2.1)
     inflection (1.0.0)
     io-like (0.3.1)
     jbuilder (2.11.2)
@@ -261,6 +295,7 @@ GEM
     rolify (6.0.0)
     ruby2_keywords (0.0.4)
     ruby_dep (1.5.0)
+    ruby_http_client (3.5.2)
     rubyzip (2.3.0)
     rvm1-capistrano3 (1.4.0)
       capistrano (~> 3.0)
@@ -287,6 +322,8 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sendgrid-ruby (6.4.0)
+      ruby_http_client (~> 3.4)
     slack-ruby-client (0.17.0)
       faraday (>= 1.0)
       faraday_middleware
@@ -319,6 +356,9 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.7)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (3.7.0)
@@ -354,7 +394,9 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   devise
+  dotenv-rails
   faker
+  ibm_watson (~> 2.1, >= 2.1.1)
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   multiverse
@@ -368,6 +410,7 @@ DEPENDENCIES
   rvm1-capistrano3
   sass-rails (~> 5.0)
   selenium-webdriver
+  sendgrid-ruby
   slack-ruby-client
   spring
   spring-watcher-listen (~> 2.0.0)

@@ -1076,7 +1076,8 @@
 							</div><!-- /Alert Mandatory -->
 
 
-							<form action="leads" method="post" enctype="multipart/form-data">
+							<%# <form action="leads" method="post" enctype="multipart/form-data"> %>
+							<%= form_for Lead.new do |a| %>
 								<fieldset>
 									<%= hidden_field_tag :authenticity_token, form_authenticity_token -%>
 									<input type="hidden" name="action" value="lead_send" />
@@ -1084,54 +1085,72 @@
 									<div class="row">
 											<input type="hidden" value="date" name="lead[DateOfRequest]" id="date" readonly="readonly">
 											<div class="col-md-4">
-												<label for="FullName">Full Name *</label>
-												<input required type="text" value="" class="form-control" name="lead[FullName]" id="name">
+												<%# <label for="FullName">Full Name *</label> %>
+												<%# <input required type="text" value="" class="form-control" name="lead[FullName]" id="name"> %>
+												<%= a.label :FullName, "Full Name *" %>
+												<%= a.text_field :FullName %>
 											</div>
 											<div class="col-md-4">
-												<label for="Email">E-mail Address *</label>
-												<input required type="email" value="" class="form-control" name="lead[Email]" id="email">
+												<%# <label for="Email">E-mail Address *</label> %>
+												<%# <input required type="email" value="" class="form-control" name="lead[Email]" id="email"> %>
+												<%= a.label :Email, "E-mail Address *" %>
+												<%= a.text_field :Email %>
 											</div>
 											<div class="col-md-4">
-												<label for="Phone">Phone</label>
-												<input type="text" value="" class="form-control" name="lead[Phone]" id="phone">
+												<%# <label for="Phone">Phone</label> %>
+												<%# <input type="text" value="" class="form-control" name="lead[Phone]" id="phone"> %>
+												<%= a.label :Phone, "Phone" %>
+												<%= a.text_field :Phone %>
 											</div>
 											<div class="col-md-4">
-												<label for="CompanyName">Company Name</label>
-												<input required type="text" value="" class="form-control" name="lead[CompanyName]" id=company_name">
+												<%# <label for="CompanyName">Company Name</label> %>
+												<%# <input required type="text" value="" class="form-control" name="lead[CompanyName]" id=company_name"> %>
+												<%= a.label :CompanyName, "Company Name" %>
+												<%= a.text_field :CompanyName %>
 											</div>
 											<div class="col-md-4">
-												<label for="ProjectName">Project Name</label>
-												<input type="text" value="" class="form-control" name="lead[ProjectName]" id="project_name">
+												<%# <label for="ProjectName">Project Name</label> %>
+												<%# <input type="text" value="" class="form-control" name="lead[ProjectName]" id="project_name"> %>
+												<%= a.label :ProjectName, "Project Name" %>
+												<%= a.text_field :ProjectName %>
 											</div>
 											<div class="col-md-4">
-												<label for="ProjectDescription">Project Description</label>
-												<input type="text" value="" class="form-control" name="lead[ProjectDescription]" id="project_description">
+												<%# <label for="ProjectDescription">Project Description</label> %>
+												<%# <input type="text" value="" class="form-control" name="lead[ProjectDescription]" id="project_description"> %>
+												<%= a.label :ProjectDescription, "Project Description" %>
+												<%= a.text_field :ProjectDescription %>
 											</div>
 									</div>
 									<div class="row">
 											<div class="col-md-12">
-												<label for="Departement">Department</label>
-												<select class="form-control pointer" name="lead[Departement]" id="department">
-													<option value="">--- Select ---</option>
-													<option value="Marketing">Residential</option>
-													<option value="Webdesign">Commercial</option>
-													<option value="Architecture">Corporate</option>
-													<option value="Architecture">Hybrid</option>
-												</select>
+												<!--<label for="Departement">Department</label>-->
+												<%= a.label :Departement, "Department" %>
+												<%= a.select :Departement, [["--- Select ---", ""], "Residential", "Commercial", "Corporate", "Hybrid"] %>
+												<%# <select class="form-control pointer" name="lead[Departement]" id="department"> %>
+													<%# <option value="">--- Select ---</option> %>
+													<%# <option value="Marketing">Residential</option> %>
+													<%# <option value="Webdesign">Commercial</option> %>
+													<%# <option value="Architecture">Corporate</option> %>
+													<%# <option value="Architecture">Hybrid</option> %>
+												<%# </select> %>
 											</div>
 									</div>
 									<div class="row">
 											<div class="col-md-12">
-												<label for="Message">Message *</label>
-												<textarea required maxlength="10000" rows="8" class="form-control" name="lead[Message]" id="message"></textarea>
+												<%# <label for="Message">Message *</label> %>
+												<%# <textarea required maxlength="10000" rows="8" class="form-control" name="lead[Message]" id="message"></textarea> %>
+												
+												<%= a.label :Message, "Message *" %>
+												<%= a.text_field :Message %>
 											</div>
 									</div>
 									<div class="row">
 											<div class="col-md-12">
-												<label for="AttachedFile">File Attachment</label>
-
+												<%# <label for="AttachedFile">File Attachment</label> %>
+												<%= a.label :file, "File Attachment" %>
+												<%= a.file_field :file %>
 												<!-- custom file upload -->
-												<input class="custom-file-upload" type="file" id="file" name="lead[AttachedFile]" id="attachment" data-btn-text="Select a File" />
+												<%# <input class="custom-file-upload" type="file" id="file" name="lead[AttachedFile]" id="attachment" data-btn-text="Select a File" /> %>
 												<small class="text-muted block">Max file size: 10Mb (zip/pdf/jpg/png)</small>
 
 											</div>
@@ -1144,7 +1163,8 @@
 										<button onclick="" class="btn btn-primary"><i class="fa fa-check"></i> SEND MESSAGE</button>
 									</div>
 								</div>
-							</form>
+							<%# </form> %>
+							<% end %> 
 
 						</div>
 						<!-- /FORM -->
