@@ -4,8 +4,8 @@ require 'sinatra'
 module Messenger
     class SMS
         def send_sms()
-            account_sid = ENV['TWILIO_ACCOUNT_SID']
-            auth_token = ENV['TWILIO_AUTH_TOKEN']
+            account_sid = ENV['TWILIO-ACCOUNT']
+            auth_token = ENV['TWILIO-AUTH']
             client = Twilio::REST::Client.new(account_sid, auth_token)
 
             from = '+19412412411' # Your Twilio number
@@ -19,4 +19,3 @@ module Messenger
         end
     end
 end
-
