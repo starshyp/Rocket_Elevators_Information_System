@@ -175,7 +175,7 @@ post "/watson/refreshaudio", to: "watson#refreshaudio"
 ![](https://ucecc5d66f6dbfb17ccf6a128f94.previews.dropboxusercontent.com/p/thumb/ABMEkIJruupz7Z3agPjY-9q1NIijZGxo4fXJKRCGD6jlQSYpD0bso9CsbYeNgXPkj1W8lpC6DUEcbFTsuCxK2gvZe-dXzJAWR8M1Sfn-vgKfmV6VbZFlbK2BYoISFypcXiI_-QXxFTBTladbLfvhUftY1LTI7uKANnZzc7yWJ3zF-pznmPdc-7I9O65ccIOEiTfZot8sG8HxuySFbHdzBLajwkHiDrDcOHCQfzFDDg7Q4YSrG8G7wNHsmpo3rEgQGmUNLbXkjTlQsPzByleApsBJNr7ur5gkP7DOJYA2uu3QROCo6V5W7GeqF8r_reCSOJr6jgqDWfCL05oIRC1Q6UQszRwzD2nZD8but788KL-vduNfHzjozrmVTl7mMp4cqyqwS7O3xEGEtQWJSfXQloB_/p.png)
 
 ### Notes
-After updating the count of a resource (leads, quotes, etc.), wait 30 seconds after refreshing before playing the audio for it to update with the new figures.
+After updating the count of a resource (leads, quotes, etc.), go back to the main 'Dashboard' then back to the audio tab and wait 30 seconds before playing the audio again for it to update with the new figures.
 </details>
 
 * Ruby version : ruby 2.6.6
