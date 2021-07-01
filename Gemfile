@@ -92,3 +92,5 @@ gem 'ibm_watson', '~> 2.1', '>= 2.1.1'
 
 gem 'twilio-ruby'
 gem 'sinatra'
+
+gem 'gmaps4rails'
