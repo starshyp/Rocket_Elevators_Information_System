@@ -12,11 +12,11 @@
 	<script src='//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'> </script>
 	
 <script type="text/javascript">  
-handler = Gmaps.build('Google');  
-handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){  
-    markers = handler.addMarkers(<%=raw @building_detail_default.to_json %>);  
-    handler.bounds.extendWith(markers);  
-    handler.fitMapToBounds();  
-});  
+  handler = Gmaps.build('Google');  
+  handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){  
+      markers = handler.addMarkers(<%=raw @building_detail_default.to_json %>);  
+      handler.bounds.extendWith(markers);  
+      handler.fitMapToBounds();  
+  });  
 </script>
 </body>

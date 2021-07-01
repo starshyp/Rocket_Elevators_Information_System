@@ -60,34 +60,22 @@ class BuildingDetailsController < ApplicationController
 
   
   def load_buildingmarkers
-    @building_detail_default = Gmaps4rails.build_markers(BuildingDetail.all) do |building_detail, marker|  
+    @building_detail_default = Gmaps4rails.build_markers(BuildingDetail.all.limit(10)) do |building_detail, marker|  
       building1 = Building.where(id: building_detail.building_id).first
       address1 = Address.where(id: building1.address_id).first
+      customer1 = Customer.where(id: building1.customer_id).first
       results = Geocoder.search(address1.NumberAndStreet)
       coords = results.first.coordinates
       marker.lat coords[0]
       marker.lng coords[1]
-    
-      @status = rand(1..4)  
-      @battery = rand(10..90)  
-      @ip = "192.168."+rand(0..255).to_s+"."+rand(15..250).to_s  
-      @connected = rand(50..100)  
-    
-      if @status == 1  
-        url_alert = "/good.png"  
-        @status == "Normal"  
-      else  
-        url_alert = "/alert.png"  
-      end  
       
-      marker.picture({  
-        "url" => url_alert,  
-        "width" => 35,  
-        "height" => 30  
-      })  
+      # marker.picture({  
+      #   "url" => url_alert,  
+      #   "width" => 35,  
+      #   "height" => 30  
+      # })  
       
-      marker.infowindow render_to_string(:partial => "/building_detail/info",   
-        :locals => {:name => building.name, :battery => @battery, :date => rand(6.months.ago..Time.now), :ip => @ip, :connected => @connected })  
+      marker.infowindow render_to_string(:partial => "/building_details/info",  :locals => {:name => customer1.CompanyName })  
     end  
   end
 
