@@ -1,10 +1,8 @@
 class ApplicationController < ActionController::Base
-<<<<<<< HEAD
 	def configure_permitted_parameters
-        devise_parameter_sanitizer.permit(:signup, keys: [:name, :phone])
-        devise_parameter_sanitizer.permit(:account_updates, keys: [:name, :phone])
-    end
-=======
+    devise_parameter_sanitizer.permit(:signup, keys: [:name, :phone])
+    devise_parameter_sanitizer.permit(:account_updates, keys: [:name, :phone])
+  end
 
   # module Devise
   #   alias :devise_current_user :current_user
@@ -34,5 +32,9 @@ class ApplicationController < ActionController::Base
   #   @devise_current_user = @user
   # end
 
->>>>>>> colby
+	def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:signup, keys: [:name, :phone])
+    devise_parameter_sanitizer.permit(:account_updates, keys: [:name, :phone])
+  end
+
 end

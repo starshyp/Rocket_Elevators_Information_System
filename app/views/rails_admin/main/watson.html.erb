@@ -19,15 +19,15 @@
 	    	dataType:'json',
 	    	data:{
 	    		authenticity_token: window._token
-	    	},
-	    	success:function(data){
-	    		alert("success!!!")
-	    		console.log(data)
-	    	},
-	    	error:function(data){
-	    		alert("failed!!!")
-	    		console.log(data)
 	    	}
+	    	// success:function(data){
+	    	// 	alert("success!!!")
+	    	// 	console.log(data)
+	    	// },
+	    	// error:function(data){
+	    	// 	alert("failed!!!")
+	    	// 	console.log(data)
+	    	// }
 	    });
         $(".audio-play")[0].currentTime = 0;
         return $(".audio-play")[0].play();
