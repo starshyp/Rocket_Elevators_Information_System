@@ -25,6 +25,7 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.save
+        migrate_to_dropbox
         format.html { redirect_to @customer, notice: "Customer was successfully created." }
         format.json { render :show, status: :created, location: @customer }
       else
@@ -38,6 +39,7 @@ class CustomersController < ApplicationController
   def update
     respond_to do |format|
       if @customer.update(customer_params)
+        migrate_to_dropbox
         format.html { redirect_to @customer, notice: "Customer was successfully updated." }
         format.json { render :show, status: :ok, location: @customer }
       else
@@ -67,3 +69,43 @@ class CustomersController < ApplicationController
       params.require(:customer).permit(:CompanyName, :NameOfContact, :CompanyContactPhone, :EmailOfTheCompany, :CompanyDescription, :NameOfServiceTechAuthority, :TechAuhtorityPhone, :TechManagerServiceEmail)
     end
 end
+
+
+
+
+
+
+# # after_create :migrate_to_dropbox # call migrate_to_dropbox after creating a customer
+# # after_update :migrate_to_dropbox  # call migrate_to_dropbox after updating a customer
+
+# #########################################################
+# # The funstion attachement to dropbox,
+# def migrate_to_dropbox   
+#     puts customer_params[:id]
+#     dropbox_client = DropboxApi::Client.new(ENV["DROPBOX_TOKEN"])
+#     puts dropbox_client
+#     puts "**********************************"
+#     puts customer_params[:EmailOfTheCompany]
+#     Lead.where(email: customer_params[:EmailOfTheCompany]).each do |lead| # <----for each lead has this Email  
+#       puts "lead"
+#       unless lead.attachment.nil?   #<----check if the lead for attach file
+#         puts "enter"
+#         path = "/" + customer_params[:NameOfContact]   #<----create a variable path that has the full name of the company contact
+#         begin
+#           puts "create_folder"
+#             dropbox_client.create_folder path
+
+#         rescue DropboxApi::Errors::FolderConflictError => err
+#           puts "The folder is not created since it already exists. just carry on with uploading the file"
+#         end
+#         begin
+#           dropbox_client.upload(path + "/" + lead.file_name, lead.attachment)
+#         rescue DropboxApi::Errors::FileConflictError => err
+#           puts "File already exists in the folder.do not upload anything."
+#         end
+        
+#         lead.attachment = nil; #<----delete  attachement to avoid duplication
+#         lead.save!
+#       end
+#   end
+# end

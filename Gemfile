@@ -10,6 +10,7 @@ gem 'devise'
 gem 'rails_admin', '~> 2.0'
 gem 'multiverse'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'dropbox_api'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.6'
