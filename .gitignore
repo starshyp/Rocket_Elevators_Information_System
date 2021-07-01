@@ -8,9 +8,10 @@
 /.bundle
 
 /config/database.yml
+/config/application.yml
 .env
 sendgrid.env
-#ibm-credentials.env
+ibm-credentials.env
 /config/initializers/smtp.rb
 
 # Ignore all logfiles and tempfiles.

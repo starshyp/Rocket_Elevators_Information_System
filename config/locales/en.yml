@@ -30,4 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  admin:
+    #hello: "Hello world"
+    actions:
+      watson:
+        title: "IBM Watson"
+        menu: "Audio Brief"
+        breadcrumb: "Audio Brief"

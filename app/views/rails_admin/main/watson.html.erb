@@ -1,0 +1,19 @@
+<body>
+
+<!-- audio_tag "watson.mp3", autoplay: false %>-->
+<!--<audio controls>-->
+<!--  <source src="app/assets/audio/watson.mp3" type="audio/mp3">-->
+<!--</audio>-->
+
+<%= audio_tag "watson.mp3", class: "audio-play" %> <!--controls: true-->
+<p class="btn btn-primary audioButton">Play Briefing</p>
+
+<script>
+    $(".audioButton").on("click", function() {
+        $(".audio-play")[0].currentTime = 0;
+        return $(".audio-play")[0].play();
+        // else $("audio-play").pause();
+    });
+</script>
+
+</body>
