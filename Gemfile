@@ -96,3 +96,4 @@ gem 'sinatra'
 
 gem 'gmaps4rails'
 gem 'underscore-rails'
+gem 'geocoder'
