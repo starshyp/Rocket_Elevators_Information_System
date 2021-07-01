@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :address_geocodes
   resources :leads
   resources :elevators
   resources :columns
