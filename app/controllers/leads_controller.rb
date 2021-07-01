@@ -30,6 +30,10 @@ class LeadsController < ApplicationController
     @lead = Lead.new(lead_params)
     @lead.DateOfRequest = Time.now
 
+    subject = "#{@lead.FullName} from #{@lead.CompanyName}"
+    comment = "The contact #{@lead.FullName} from company #{@lead.CompanyName} can be reached at email  #{@lead.Email} and at phone number #{@lead.Phone}. #{@lead.Departement} has a project named #{@lead.ProjectName} which would require contribution from Rocket Elevators.\n#{@lead.ProjectDescription}"
+    ZendeskAPI::Ticket.create($zenclient, :subject => subject, :comment => { :value => comment }, :priority => "normal", :type => "question" ) # :email_ccs => [{ :user_email => :Email, :action => "put"}],
+    
     #################### SENDGRID ALTERNATIVE ###################
     # #def sendgrid
     mail = Mail.new

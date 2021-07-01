@@ -15,5 +15,25 @@ module Rocket
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
+    if ENV["SLACK_API_TOKEN"] then
+      Slack.configure do |config|
+        config.token = ENV["SLACK_API_TOKEN"]
+        $SlackClient = Slack::Web::Client.new
+      end
+    end
+
+    require 'zendesk_api'
+    require 'oauth2'
+
+    $zenclient = ZendeskAPI::Client.new do |config|
+      config.url = "https://rocketelevator312891.zendesk.com/api/v2"
+      config.retry = true
+      
+      config.logger = true
+      config.username = "rocketelevator312890@gmail.com"
+
+      config.token = ENV["ZENDESK_TOKEN"]
+      config.access_token = ENV["ZENDESK_AUTH_TOKEN"]
+    end
   end
 end

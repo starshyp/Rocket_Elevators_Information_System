@@ -34,3 +34,6 @@ ibm-credentials.env
 /config/master.key
 
 *Zone.Identifiersendgrid.env
+
+# Ignore application configuration
+/config/application.yml
