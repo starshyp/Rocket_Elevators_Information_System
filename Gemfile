@@ -12,6 +12,7 @@ gem 'devise'
 gem 'rails_admin', '~> 2.0'
 gem 'multiverse'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'dropbox_api'
 
 gem 'slack-ruby-client'
 gem 'async-websocket', '~> 0.8.0'

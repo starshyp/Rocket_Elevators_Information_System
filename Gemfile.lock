@@ -118,6 +118,9 @@ GEM
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
+    dropbox_api (0.1.19)
+      faraday (~> 1.0)
+      oauth2 (~> 1.1)
     erubi (1.10.0)
     eventmachine (1.2.7)
     execjs (2.8.1)
@@ -410,6 +413,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   dotenv-rails
+  dropbox_api
   faker
   figaro
   ibm_watson (~> 2.1, >= 2.1.1)
