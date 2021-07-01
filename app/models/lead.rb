@@ -8,7 +8,7 @@ class Lead < ApplicationRecord
 	# The funstion attachement to dropbox,
 	def migrate_to_dropbox   
 	    puts self.id
-	    dropbox_client = DropboxApi::Client.new("")
+	    dropbox_client = DropboxApi::Client.new(ENV["DROPBOX_TOKEN"])
 	    puts dropbox_client
 	    puts self.Email                          #delete later
 		lead = Lead.find_by(email: self.Email)
