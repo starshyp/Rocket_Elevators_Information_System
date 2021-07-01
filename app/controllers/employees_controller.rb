@@ -8,6 +8,8 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1 or /employees/1.json
   def show
+    # @employee = Employee.find_by(id: params[:id])
+    # ERB.render('watson.html.erb', instance)
   end
 
   # GET /employees/new

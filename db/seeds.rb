@@ -473,6 +473,7 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
 
       # nbColumn = Column.count
 
+      #elevatorStatus = ["Active", "Inactive"].sample
       for _ in 1..4  #Loop Elevator in Column **********************
         elevator = Elevator.create!(
           column_id: column.id,
@@ -480,6 +481,7 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
           Model: Faker::Vehicle.model,
           ElevatorType: departements.sample,
           Status: "on",
+          #Status: elevatorStatus,
           DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
           DateOfLastInspection: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
           CertificateOfInspection: Faker::FunnyName.name ,
