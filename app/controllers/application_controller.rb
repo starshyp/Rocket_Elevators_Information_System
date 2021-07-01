@@ -31,10 +31,4 @@ class ApplicationController < ActionController::Base
   # def devise_current_user
   #   @devise_current_user = @user
   # end
-
-	def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:signup, keys: [:name, :phone])
-    devise_parameter_sanitizer.permit(:account_updates, keys: [:name, :phone])
-  end
-
 end
