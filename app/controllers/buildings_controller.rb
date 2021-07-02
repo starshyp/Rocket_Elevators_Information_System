@@ -13,19 +13,20 @@ class BuildingsController < ApplicationController
       buildingdetail1 = BuildingDetail.where(InformationKey: "number of floors", building_id: building1.id).first
       results = AddressGeocode.fromAddress("#{address1.NumberAndStreet}, #{address1.City}, #{address1.PostalCode}, #{address1.Country}" )
 
-      clientname = customer1.CompanyName
-      numoffloors = 0
-      numofbatteries = 0
-      numofcolumns = 0
-      numofelevators = 0
-      fullnameofcontact = customer1.NameOfContact
+      if !results.nil? then
+        clientname = customer1.CompanyName
+        numoffloors = 0
+        numofbatteries = 0
+        numofcolumns = 0
+        numofelevators = 0
+        fullnameofcontact = customer1.NameOfContact
+        
+        if buildingdetail1.present? then
+          numoffloors = buildingdetail1.Value
+        end
 
-      if buildingdetail1.present? then
-        numoffloors = buildingdetail1.Value
-      end
-
-      batteries = Battery.where(building_id: building1.id)
-      batteries.each do |battery|
+        batteries = Battery.where(building_id: building1.id)
+        batteries.each do |battery|
         numofbatteries += 1
         columns = Column.where(battery_id: battery.id)
         columns.each do |column|
@@ -35,9 +36,8 @@ class BuildingsController < ApplicationController
             numofelevators += 1
           end
         end
-      end
+        end
       
-      if !results.nil? then
         newmarker = { 
           :coords => [results[0], results[1]],
           :numoffloors => numoffloors,
