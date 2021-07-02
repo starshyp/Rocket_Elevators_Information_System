@@ -9,7 +9,7 @@ class Lead < ApplicationRecord
 	#after_update :migrate_to_dropbox  # call migrate_to_dropbox after updating a customer
 	
 	def send_zendesk
-		if !($zenclient && ENV["ZENDESK_URL"] && ENV["ZENDESK_TOKEN"] && ENV["ZENDESK_OAUTH_TOKEN"] && ENV["ZENDESK_EMAIL"] && ENV["ZENDESK_PASSWORD"]) && !$rocketseeding then
+		if !($zenclient && ENV["ZENDESK_URL"] && ENV["ZENDESK_TOKEN"] && ENV["ZENDESK_OAUTH_TOKEN"] && ENV["ZENDESK_EMAIL"] && ENV["ZENDESK_PASSWORD"]) || !$rocketseeding then
 			
 			return
 		end
