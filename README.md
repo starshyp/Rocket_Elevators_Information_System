@@ -227,21 +227,21 @@ The purpose of this API is to send a text message whenever the status of an elev
 Dependencies
 	
 Software and gem needed:
-•	Ruby 2.6.6 - Open-source programming language
-•	Gem 3.0.9 - Web framework
-•	Rails 5.2.6 - Open source database
-•	Gem ‘twilio-ruby’
+- Ruby 2.6.6 - Open-source programming language
+- Gem 3.0.9 - Web framework
+- Rails 5.2.6 - Open source database
+- Gem ‘twilio-ruby’
 
 To try the code, you have to start the server log into the Rocket Elevators website and click on  “back office” in the top navigation bar. You would then have to select the elevators tab in the navigation section and select a random elevator. The final step would be to edit the status and change it to “intervention”.
 	
 Usage
 	
 Here are the commands that will have to be entered in your terminal to start the server:
-•	mySQL server start
-•	rails db:create
-•	Rails db:migrate
-•	rails db:seed
-•	rails s
+- mySQL server start
+- rails db:create
+- Rails db:migrate
+- rails db:seed
+- rails s
 
 Login information:
 	
