@@ -9,7 +9,7 @@ class Lead < ApplicationRecord
 	#after_update :migrate_to_dropbox  # call migrate_to_dropbox after updating a customer
 	
 	def send_zendesk
-		if !($zenclient && ENV["ZENDESK_URL"] && ENV["ZENDESK_TOKEN"] && ENV["ZENDESK_OAUTH_TOKEN"] && ENV["ZENDESK_EMAIL"] && ENV["ZENDESK_PASSWORD"]) then
+		if !($zenclient && ENV["ZENDESK_URL"] && ENV["ZENDESK_TOKEN"] && ENV["ZENDESK_OAUTH_TOKEN"] && ENV["ZENDESK_EMAIL"] && ENV["ZENDESK_PASSWORD"]) && !$rocketseeding then
 			
 			return
 		end
@@ -18,7 +18,7 @@ class Lead < ApplicationRecord
 		comment = "The contact #{self.FullName} from company #{self.CompanyName} can be reached at email  #{self.Email} and at phone number #{self.Phone}. #{self.Departement} has a project named #{self.ProjectName} which would require contribution from Rocket Elevators.\n#{self.ProjectDescription}"
 		ticket = ZendeskAPI::Ticket.create($zenclient, :subject => subject, :comment => { :value => comment }, :priority => "normal", :type => "question" ) # :email_ccs => [{ :user_email => :Email, :action => "put"}],
 		
-		if !self.file.nil? then
+		if !self.file.nil? && self.file.attached? then
 			uri = URI.parse(ENV["ZENDESK_URL"]+"/uploads.json?filename=#{SecureRandom.hex}.png")
 			request = Net::HTTP::Post.new(uri)
 			request.basic_auth(ENV["ZENDESK_EMAIL"], ENV["ZENDESK_PASSWORD"])
@@ -65,6 +65,9 @@ class Lead < ApplicationRecord
 	#########################################################
 	# The funstion attachement to dropbox,
 	def migrate_to_dropbox   
+		if $rocketseeding then
+			return
+		end
 		puts self.id
 		dropbox_client = DropboxApi::Client.new(ENV["DROPBOX_TOKEN"])
 		puts dropbox_client
