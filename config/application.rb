@@ -24,16 +24,22 @@ module Rocket
 
     require 'zendesk_api'
     require 'oauth2'
+    if ENV["ZENDESK_URL"] then
+      $zenclient = ZendeskAPI::Client.new do |config|
+        config.url = ENV["ZENDESK_URL"]
+        config.retry = true
 
-    $zenclient = ZendeskAPI::Client.new do |config|
-      config.url = ENV["ZENDESK_URL"]
-      config.retry = true
-      
-      config.logger = true
-      config.username = ENV["ZENDESK_EMAIL"]
+        config.logger = true
+        config.username = ENV["ZENDESK_EMAIL"]
 
-      config.token = ENV["ZENDESK_TOKEN"]
-      config.access_token = ENV["ZENDESK_AUTH_TOKEN"]
+        config.token = ENV["ZENDESK_TOKEN"]
+        config.access_token = ENV["ZENDESK_AUTH_TOKEN"]
+      end
+    else
+      puts "##########################"
+      puts "not using zendesk"
+      puts ENV["ZENDESK_URL"].to_s
+      puts "##########################"
     end
   end
 end
