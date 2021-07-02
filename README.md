@@ -245,6 +245,6 @@ Here are the commands that will have to be entered in your terminal to start the
 
 Login information:
 	
-Email: nicolas.genest@codeboxx.biz
-Password: codeboxx
+- Email: nicolas.genest@codeboxx.biz
+- Password: codeboxx
 	
