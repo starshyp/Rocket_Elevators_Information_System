@@ -26,11 +26,11 @@ module Rocket
     require 'oauth2'
 
     $zenclient = ZendeskAPI::Client.new do |config|
-      config.url = "https://rocketelevator312891.zendesk.com/api/v2"
+      config.url = ENV["ZENDESK_URL"]
       config.retry = true
       
       config.logger = true
-      config.username = "rocketelevator312890@gmail.com"
+      config.username = ENV["ZENDESK_EMAIL"]
 
       config.token = ENV["ZENDESK_TOKEN"]
       config.access_token = ENV["ZENDESK_AUTH_TOKEN"]
