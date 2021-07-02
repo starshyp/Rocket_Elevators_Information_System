@@ -1,5 +1,183 @@
 # Readme for the Rocket Elevators website at http://rocketelevators.online/
 
+<Details>
+<summary>SendGrid API</summary>
+
+### What is SendGrid?
+
+SendGrid provides a cloud-based service that assists businesses with email delivery.
+
+### New gems installed
+
+```bash
+gem 'sendgrid-ruby'
+gem "figaro"
+```
+
+### Implementation
+*app/controllers/leads_controller.rb*
+```ruby
+mail = Mail.new
+mail.from = Email.new(email: 'rocketelevator312890+sendgrid@gmail.com')
+personalization = Personalization.new
+personalization.add_to(Email.new(email: @lead.Email))
+#personalization.add_to(Email.new(email: params[:Email]))
+personalization.add_dynamic_template_data({
+    "FullName" => @lead.FullName,
+    "ProjectName" => @lead.ProjectName
+    })
+mail.add_personalization(personalization)
+mail.template_id = 'd-a1170dbad8924f9ba0f038014445e76b'
+
+sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'])
+begin
+  response = sg.client.mail._("send").post(request_body: mail.to_json)
+rescue Exception => e
+  puts e.message
+end
+puts response.status_code
+puts response.body
+#puts response.parsed_body
+puts response.headers
+```
+*Email preview when someone submits a contact form*
+
+![](https://uc8cb2b4ed7396b17340c665177b.previews.dropboxusercontent.com/p/thumb/ABPWglemUAyJeYg5R4wsWnEPWWyZ_R5Mf0D8LTUad5TP3QOxl0icFttmBloIHpUGQPAphIjaK80oy92F0HG-Owz85QGBEUkBrfYKy_b8JSDZJM4o_uLsoYAZ9co0hXEcciCGDakierbPbciD_1UkxiPUGeZAjGM39zl4he1F1jlkdX4NS5J0qnOLACS_6vPkzeKCNU-eeR9y5YYahxWaFGQf3GhM7FBiFwkEdn7pEKhsB7AMirT7iYIksp-110x5yNfY5eHzZWK4nCoj3AP3gFyiPv2MchbWSPoWaFycXvRL_o1UpHv2Dr3wOSHKFyYd3L-KEl2aZIsdYcxv-zJ49kzz-9WSj_IozXXDqFL7_y6Y49plbrYV3Pgkq56Ovs-Cd_ThA4HpOIv4UJIg7M8LsNEW/p.png)
+
+### Notes
+No notes.
+</details>
+
+<Details>
+<summary>IBM Watson (Text to Speech) API</summary>
+
+### What is IBM Watson (Text to Speech)?
+
+It is an API cloud service that enables you to convert written text into natural-sounding audio in a variety of languages and voices within an existing application.
+
+### New gems installed
+
+```bash
+gem 'ibm_watson', '~> 2.1', '>= 2.1.1'
+gem "figaro"
+```
+
+### Implementation
+*app/controllers/watson_controller.rb*
+```ruby
+class WatsonController < ApplicationController
+  require "ibm_watson"
+  require "ibm_watson/text_to_speech_v1"
+  include IBMWatson
+
+  def refreshaudio
+    ################## IBM WATSON ##################
+    authenticator = IBMWatson::Authenticators::IamAuthenticator.new(
+      apikey: ENV['TEXT_TO_SPEECH_APIKEY'],
+    )
+    text_to_speech = IBMWatson::TextToSpeechV1.new(
+      authenticator: authenticator
+    )
+    text_to_speech.service_url = ENV['TEXT_TO_SPEECH_URL'] #/v1/workspaces/
+    
+    user = Employee.where(user_id: current_user.id).first
+
+    greeting = "Greetings #{user.FirstName} #{user.LastName}. There are currently #{Elevator.count} elevators deployed in #{Building.count} buildings of your #{Customer.count} customers. Currently, #{Elevator.where.not(:Status => "on").count} elevators are not in Running Status and are being serviced. You currently have #{Quote.count} quotes awaiting processing. You currently have #{Lead.count} leads in your contact requests. #{Battery.count} are deployed across #{Address.distinct.count(:City)} cities."
+
+    #puts JSON.pretty_generate(text_to_speech.list_voices.result)
+    File.open("app/assets/audio/watson.mp3", "wb") do |audio_file|
+      response = text_to_speech.synthesize(
+        text: greeting,
+        accept: "audio/mp3",
+        voice: "en-GB_JamesV3Voice"
+      ).result
+      audio_file.write(response)
+    end
+    ################## IBM WATSON ##################
+  end
+
+end
+```
+*lib/watson.rb*
+```ruby
+module RailsAdmin
+  module Config
+    module Actions
+      class Watson < RailsAdmin::Config::Actions::Base
+        RailsAdmin::Config::Actions.register(self)
+
+        register_instance_option :root? do
+          true
+        end
+
+        register_instance_option :breadcrumb_parent do
+          nil
+        end
+
+        register_instance_option :route_fragment do
+          'watson.html.erb'
+        end
+
+        register_instance_option :link_icon do
+          'icon-play'
+        end
+
+        register_instance_option :statistics? do
+          true
+        end
+
+      end
+    end
+  end
+end
+```
+*config/locales/en.yml*
+```yml
+en:
+  admin:
+    actions:
+      watson:
+        title: "IBM Watson"
+        menu: "Audio Brief"
+        breadcrumb: "Audio Brief"
+```
+
+*app/views/rails_admin/main/watson.html.erb*
+```javascript
+<%= audio_tag "watson.mp3", class: "audio-play" %> <!--controls: true-->
+<p class="btn btn-primary audioButton">Play Briefing</p>
+
+<%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
+
+<script>
+
+    $(".audioButton").on("click", function() {
+	    $.ajax({
+	    	url:'/watson/refreshaudio',
+	    	type:'POST',
+	    	dataType:'json',
+	    	data:{
+	    		authenticity_token: window._token
+	    	}
+	    });
+        $(".audio-play")[0].currentTime = 0;
+        return $(".audio-play")[0].play();
+    });
+</script>
+```
+*config/routes,rb*
+```ruby
+post "/watson/refreshaudio", to: "watson#refreshaudio"
+```
+
+
+*Audio briefing in backend preview*
+![](https://ucecc5d66f6dbfb17ccf6a128f94.previews.dropboxusercontent.com/p/thumb/ABMEkIJruupz7Z3agPjY-9q1NIijZGxo4fXJKRCGD6jlQSYpD0bso9CsbYeNgXPkj1W8lpC6DUEcbFTsuCxK2gvZe-dXzJAWR8M1Sfn-vgKfmV6VbZFlbK2BYoISFypcXiI_-QXxFTBTladbLfvhUftY1LTI7uKANnZzc7yWJ3zF-pznmPdc-7I9O65ccIOEiTfZot8sG8HxuySFbHdzBLajwkHiDrDcOHCQfzFDDg7Q4YSrG8G7wNHsmpo3rEgQGmUNLbXkjTlQsPzByleApsBJNr7ur5gkP7DOJYA2uu3QROCo6V5W7GeqF8r_reCSOJr6jgqDWfCL05oIRC1Q6UQszRwzD2nZD8but788KL-vduNfHzjozrmVTl7mMp4cqyqwS7O3xEGEtQWJSfXQloB_/p.png)
+
+### Notes
+After updating the count of a resource (leads, quotes, etc.), go back to the main 'Dashboard' then back to the audio tab and wait 30 seconds before playing the audio again for it to update with the new figures.
+</details>
+
 * Ruby version : ruby 2.6.6
 
 * Rails version: Rails 5.2.6

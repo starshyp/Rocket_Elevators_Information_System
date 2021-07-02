@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.6'
 
+gem "figaro"
 gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'cancancan'
@@ -12,6 +13,7 @@ gem 'devise'
 gem 'rails_admin', '~> 2.0'
 gem 'multiverse'
 gem 'pg', '>= 0.18', '< 2.0'
+gem 'dropbox_api'
 
 gem 'slack-ruby-client'
 gem 'async-websocket', '~> 0.8.0'
