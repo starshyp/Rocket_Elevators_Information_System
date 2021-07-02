@@ -10,7 +10,7 @@ namespace :dwh do
 
   task :connection_postgres  do 
     conn = PG.connect(
-      dbname: "datawarehouse_development"
+      dbname: Rails.configuration.database_configuration["datawarehouse_development"]["database"]
     )
     puts conn
     puts "connection postgres"
@@ -19,7 +19,7 @@ namespace :dwh do
 
   task clear: :environment do
     conn = PG.connect(
-      dbname: "datawarehouse_development"
+      dbname: Rails.configuration.database_configuration["datawarehouse_development"]["database"]
     )
     puts "Clearing DWH data structure"
     conn.exec("TRUNCATE fact_quotes, fact_contacts, fact_elevators, dim_customers")
@@ -30,7 +30,7 @@ namespace :dwh do
   task import: :environment do
     Rake::Task["dwh:clear"].invoke()
     conn = PG.connect(
-      dbname: "datawarehouse_development"
+      dbname: Rails.configuration.database_configuration["datawarehouse_development"]["database"]
     )
     puts "Rebuilding DWH data structure"
 
