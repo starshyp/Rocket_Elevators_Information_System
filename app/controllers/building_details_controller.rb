@@ -60,10 +60,10 @@ class BuildingDetailsController < ApplicationController
 
   
   def load_buildingmarkers
-    @building_detail_default = Gmaps4rails.build_markers(BuildingDetail.all) do |building_detail, marker|  
-      building1 = Building.where(id: building_detail.building_id).first
+    @building_detail_default = Gmaps4rails.build_markers(Building.all) do |building1, marker|  
       address1 = Address.where(id: building1.address_id).first
       customer1 = Customer.where(id: building1.customer_id).first
+      buildingdetail1 = BuildingDetail.where(InformationKey: "number of floors", building_id: building1.id).first
       results = AddressGeocode.fromAddress(address1.NumberAndStreet)
 
       clientname = customer1.CompanyName
@@ -73,7 +73,11 @@ class BuildingDetailsController < ApplicationController
       numofelevators = 0
       fullnameofcontact = customer1.NameOfContact
 
-      batteries = Battery.where(building_id: building_detail.building_id)
+      if buildingdetail1.present? then
+        numoffloors = buildingdetail1.Value
+      end
+
+      batteries = Battery.where(building_id: building1.id)
       batteries.each do |battery|
         numofbatteries += 1
         columns = Column.where(battery_id: battery.id)
@@ -90,12 +94,6 @@ class BuildingDetailsController < ApplicationController
         coords = results
         marker.lat coords[0]
         marker.lng coords[1]
-        
-        # marker.picture({  
-        #   "url" => url_alert,  
-        #   "width" => 35,  
-        #   "height" => 30  
-        # })  
         
         marker.infowindow render_to_string(:partial => "/building_details/info",  :locals => 
           {
