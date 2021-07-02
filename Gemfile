@@ -97,3 +97,6 @@ gem 'sinatra'
 gem 'gmaps4rails'
 gem 'underscore-rails'
 gem 'geocoder'
+
+gem 'ed25519'
+gem 'bcrypt_pbkdf'
