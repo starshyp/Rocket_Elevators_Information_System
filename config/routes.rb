@@ -27,5 +27,5 @@ Rails.application.routes.draw do
 
 	post "/leads/create", to: "leads#create"
 
-	post "/watson/refreshaudio", to: "watson#refreshaudio"
+	get "/watson/refreshaudio", to: "watson#refreshaudio"
 end
