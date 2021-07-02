@@ -7,6 +7,10 @@
 
 SendGrid provides a cloud-based service that assists businesses with email delivery.
 
+### How to use
+
+Submit a contact form using your email address.
+
 ### New gems installed
 
 ```bash
@@ -56,6 +60,10 @@ No notes.
 
 It is an API cloud service that enables you to convert written text into natural-sounding audio in a variety of languages and voices within an existing application.
 
+### How to use
+
+Login to the backoffice with nicolas.genest@codeboxx.biz with password 'codeboxx', click on the 'Audio Brief' tab and click the button to play. Please wait 2-6 seconds for the audio to process and play after clicking the button.
+
 ### New gems installed
 
 ```bash
@@ -86,14 +94,14 @@ class WatsonController < ApplicationController
     greeting = "Greetings #{user.FirstName} #{user.LastName}. There are currently #{Elevator.count} elevators deployed in #{Building.count} buildings of your #{Customer.count} customers. Currently, #{Elevator.where.not(:Status => "on").count} elevators are not in Running Status and are being serviced. You currently have #{Quote.count} quotes awaiting processing. You currently have #{Lead.count} leads in your contact requests. #{Battery.count} are deployed across #{Address.distinct.count(:City)} cities."
 
     #puts JSON.pretty_generate(text_to_speech.list_voices.result)
-    File.open("app/assets/audio/watson.mp3", "wb") do |audio_file|
+    #File.open("app/assets/audio/watson.mp3", "wb") do |audio_file|
       response = text_to_speech.synthesize(
         text: greeting,
         accept: "audio/mp3",
         voice: "en-GB_JamesV3Voice"
       ).result
-      audio_file.write(response)
-    end
+      send_data response
+    #end
     ################## IBM WATSON ##################
   end
 
@@ -145,7 +153,7 @@ en:
 
 *app/views/rails_admin/main/watson.html.erb*
 ```javascript
-<%= audio_tag "watson.mp3", class: "audio-play" %> <!--controls: true-->
+<%= audio_tag "/watson/refreshaudio", class: "audio-play" %>
 <p class="btn btn-primary audioButton">Play Briefing</p>
 
 <%= javascript_tag "window._token = '#{form_authenticity_token}'" %>
@@ -153,14 +161,6 @@ en:
 <script>
 
     $(".audioButton").on("click", function() {
-	    $.ajax({
-	    	url:'/watson/refreshaudio',
-	    	type:'POST',
-	    	dataType:'json',
-	    	data:{
-	    		authenticity_token: window._token
-	    	}
-	    });
         $(".audio-play")[0].currentTime = 0;
         return $(".audio-play")[0].play();
     });
@@ -176,7 +176,7 @@ post "/watson/refreshaudio", to: "watson#refreshaudio"
 ![](https://ucecc5d66f6dbfb17ccf6a128f94.previews.dropboxusercontent.com/p/thumb/ABMEkIJruupz7Z3agPjY-9q1NIijZGxo4fXJKRCGD6jlQSYpD0bso9CsbYeNgXPkj1W8lpC6DUEcbFTsuCxK2gvZe-dXzJAWR8M1Sfn-vgKfmV6VbZFlbK2BYoISFypcXiI_-QXxFTBTladbLfvhUftY1LTI7uKANnZzc7yWJ3zF-pznmPdc-7I9O65ccIOEiTfZot8sG8HxuySFbHdzBLajwkHiDrDcOHCQfzFDDg7Q4YSrG8G7wNHsmpo3rEgQGmUNLbXkjTlQsPzByleApsBJNr7ur5gkP7DOJYA2uu3QROCo6V5W7GeqF8r_reCSOJr6jgqDWfCL05oIRC1Q6UQszRwzD2nZD8but788KL-vduNfHzjozrmVTl7mMp4cqyqwS7O3xEGEtQWJSfXQloB_/p.png)
 
 ### Notes
-After updating the count of a resource (leads, quotes, etc.), go back to the main 'Dashboard' then back to the audio tab and wait 30 seconds before playing the audio again for it to update with the new figures.
+After pressing the 'Play Briefing' button, give it 5 seconds to process and play. Also, after updating the count of a resource (leads, quotes, etc.), go back to the main 'Dashboard' then back to the audio tab and wait 30 seconds before playing the audio again for it to update with the new figures.
 </details>
 
 
