@@ -11,7 +11,8 @@ class BuildingsController < ApplicationController
       address1 = Address.where(id: building1.address_id).first
       customer1 = Customer.where(id: building1.customer_id).first
       buildingdetail1 = BuildingDetail.where(InformationKey: "number of floors", building_id: building1.id).first
-      results = AddressGeocode.fromAddress("#{address1.NumberAndStreet}, #{address1.City}, #{address1.PostalCode}, #{address1.Country}" )
+      addressstr = "#{address1.NumberAndStreet}"
+      results = AddressGeocode.fromAddress(addressstr)
 
       if !results.nil? then
         clientname = customer1.CompanyName
@@ -48,6 +49,8 @@ class BuildingsController < ApplicationController
           :fullnameofcontact => fullnameofcontact
         }
         markerraw.push(newmarker)
+      else
+        puts "[Address invalid] #{addressstr}"
       end
     end
 
