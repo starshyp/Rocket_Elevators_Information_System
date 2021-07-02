@@ -37,3 +37,7 @@ en:
         title: "IBM Watson"
         menu: "Audio Brief"
         breadcrumb: "Audio Brief"
+      maps:
+        title: "Maps"
+        menu: "Maps"
+        breadcrumb: "Maps"

@@ -20,3 +20,5 @@
 //= link view/demo.revolution_slider.js
 //= link slider.revolution/js/jquery.themepunch.revolution.min.js
 //= link slider.revolution/js/jquery.themepunch.tools.min.js
+//= require underscore
+//= require gmaps/google

@@ -357,9 +357,9 @@ end
 types = ["Billing", "Shipping", "Home", "Business"];
 entity = ["Customer", "Building"];
 
-file = File.read('addresses.json')
+file = File.read('real_addresses.json')
 addr = JSON.parse(file)
-nbAddr = addr["Address"].size
+nbAddr = addr["addresses"].size
 status = ["Active", "Inactive"];
 
 
@@ -368,11 +368,11 @@ for i in 0..(nbAddr-1)  # Temp Loop Adress***************************
     TypeOfAddress: types.sample,
     Status: status.sample,
     Entity: entity.sample,
-    NumberAndStreet: addr["Address"][i]["NumberAndStreet"],
-    Apt: addr["Address"][i]["Apt"],
-    City: addr["Address"][i]["City"],
-    PostalCode: addr["Address"][i]["PostalCode"],
-    Country: addr["Address"][i]["Country"],
+    NumberAndStreet: addr["addresses"][i]["address1"],
+    Apt: rand(12),
+    City: addr["addresses"][i]["city"],
+    PostalCode: addr["addresses"][i]["postalCode"],
+    Country: addr["addresses"][i]["state"],
     Notes: Faker::Lorem.sentence(word_count: 3)
   )
   puts address
@@ -418,45 +418,48 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
   # Address.find(i)[:Entity] = "Building"
 
   puts building
-  iKeyShuffle = informationKeys.shuffle
-  for i in 1..rand(5)
-    iKey = iKeyShuffle[i-1]
-    iKeyValue = nil
-    case iKey
-    when "number of floors"
-      iKeyValue = rand(60)
-    when "type"
-      iKeyValue = departements.sample
-    when "architecture"
-      iKeyValue = architecture.sample
-    when "maximum number of occupants"
-      iKeyValue = rand(200)
-    when "year of construction"
-      iKeyValue = rand(2018..2021)
-    end
-    buildingDetail = BuildingDetail.create!( #BuildingDetail in Loop Building ******************
+  
+  BuildingDetail.create!(
     building: building,
-    InformationKey: iKey,
-    Value: iKeyValue
+    InformationKey: "number of floors",
+    Value: rand(5..60)
   )
-  puts buildingDetail
-
-  end
+  BuildingDetail.create!(
+    building: building,
+    InformationKey: "type",
+    Value: departements.sample
+  )
+  BuildingDetail.create!(
+    building: building,
+    InformationKey: "architecture",
+    Value: architecture.sample
+  )
+  BuildingDetail.create!(
+    building: building,
+    InformationKey: "maximum number of occupants",
+    Value: rand(50..200)
+  )
+  BuildingDetail.create!(
+    building: building,
+    InformationKey: "year of construction",
+    Value: rand(2018..2021)
+  )
+  
 
   # nbEmployee = Employee.count
 
   for _ in 1..1   # Loop Battery in Building *************************
-  batteries = Battery.create!(
-    building: building,
-    BType: departements.sample,
-    employee_id: Employee.find(rand(Employee.count)+1).id,
-    DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
-    DateOfLastInspection: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
-    CertificateOfOperations: Faker::FunnyName.name,
-    Info:Faker::Lorem.sentence(word_count: 3),
-    Notes: Faker::Lorem.sentence(word_count: 3)
-  )
-  puts batteries
+    batteries = Battery.create!(
+      building: building,
+      BType: departements.sample,
+      employee_id: Employee.find(rand(Employee.count)+1).id,
+      DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
+      DateOfLastInspection: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
+      CertificateOfOperations: Faker::FunnyName.name,
+      Info:Faker::Lorem.sentence(word_count: 3),
+      Notes: Faker::Lorem.sentence(word_count: 3)
+    )
+    puts batteries
 
   # nbBattery = Battery.count
 
