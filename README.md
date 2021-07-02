@@ -229,4 +229,6 @@ Contact Us sections sends to
 
 Updating Elevator Status to ``"Intervention"`` sends a message to 
   - #elevator_operations in Slack Rocket Elevator Server
-  - Sends a SMS to a Targeted number set in ``"application.yml"``
+  - Sends a SMS to a Targeted number set in ``"application.yml"`` using Twilio API
+  
+To try the code, you have to start the server log into the Rocket Elevators website and click on  “back office” in the top navigation bar. You would then have to select the elevators tab in the navigation section and select a random elevator. The final step would be to edit the status and change it to “intervention”.
