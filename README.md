@@ -1,4 +1,4 @@
-# Readme for the Rocket Elevators website at http://rocketelevators.online/
+# Readme for the Rocket Elevators website at http://rtrocketelevator.xyz/
 
 <Details>
 <summary>SendGrid API</summary>
@@ -219,16 +219,16 @@ For the three .SQL files, you can use this syntax while in the "current" folder 
 # Whats new
 
 Admins Dashboard
-  - Audio briefing Provided By IBM Watson 
+  - Audio briefing provided By IBM Watson 
   - Maps For geolocating our "Customers" provided by Gmaps4rails
 
 Contact Us sections sends to 
   - ZenDesk API a Question Ticket
-  - Dropbox with a provided attached file
-  - A Thank you Email to the user.
+  - Dropbox API with a provided attached file
+  - SendGrid API with a Thank you Email to the user
 
 Updating Elevator Status to ``"Intervention"`` sends a message to 
-  - #elevator_operations in Slack Rocket Elevator Server
+  - Slack Rocket Elevator Server in #elevator_operations
   - Sends a SMS to a Targeted number set in ``"application.yml"`` using Twilio API
   
 To try the code, you have to start the server log into the Rocket Elevators website and click on  “back office” in the top navigation bar. You would then have to select the elevators tab in the navigation section and select a random elevator. The final step would be to edit the status and change it to “intervention”.
