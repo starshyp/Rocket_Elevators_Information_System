@@ -4,11 +4,11 @@ require 'sinatra'
 class Elevator < ApplicationRecord
     belongs_to :column, optional: true
 
-    before_save :updated_elevator
+    before_update :updated_elevator
     after_update :send_sms
 
     def updated_elevator
-        if $SlackClient and self.Status_changed? then
+        if $SlackClient and self.Status_changed? and self.Status_change[0].nil? then
             text = "The Elevator #{self.id} with Serial Number #{self.SerialNumber} changed status from #{self.Status_change[0]} to #{self.Status_change[1]}"
             $SlackClient.chat_postMessage(channel: '#elevator_operations', text: text, as_user: true)
         end
