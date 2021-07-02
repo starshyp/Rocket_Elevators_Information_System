@@ -27,16 +27,15 @@ class BuildingsController < ApplicationController
         end
 
         batteries = Battery.where(building_id: building1.id)
+
         batteries.each do |battery|
-        numofbatteries += 1
-        columns = Column.where(battery_id: battery.id)
-        columns.each do |column|
-          numofcolumns += 1
-          elevators = Elevator.where(column_id: column.id)
-          elevators.each do |elevator|
-            numofelevators += 1
+          numofbatteries += 1
+          columns = Column.where(battery_id: battery.id)
+          columns.each do |column|
+            numofcolumns += 1
+            elevators = Elevator.where(column_id: column.id)
+            numofelevators += elevators.count
           end
-        end
         end
       
         newmarker = { 
