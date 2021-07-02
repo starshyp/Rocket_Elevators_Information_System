@@ -60,22 +60,54 @@ class BuildingDetailsController < ApplicationController
 
   
   def load_buildingmarkers
-    @building_detail_default = Gmaps4rails.build_markers(BuildingDetail.all.limit(10)) do |building_detail, marker|  
+    @building_detail_default = Gmaps4rails.build_markers(BuildingDetail.all) do |building_detail, marker|  
       building1 = Building.where(id: building_detail.building_id).first
       address1 = Address.where(id: building1.address_id).first
       customer1 = Customer.where(id: building1.customer_id).first
-      results = Geocoder.search(address1.NumberAndStreet)
-      coords = results.first.coordinates
-      marker.lat coords[0]
-      marker.lng coords[1]
-      
-      # marker.picture({  
-      #   "url" => url_alert,  
-      #   "width" => 35,  
-      #   "height" => 30  
-      # })  
-      
-      marker.infowindow render_to_string(:partial => "/building_details/info",  :locals => {:name => customer1.CompanyName })  
+      results = AddressGeocode.fromAddress(address1.NumberAndStreet)
+
+      clientname = customer1.CompanyName
+      numoffloors = 0
+      numofbatteries = 0
+      numofcolumns = 0
+      numofelevators = 0
+      fullnameofcontact = customer1.NameOfContact
+
+      batteries = Battery.where(building_id: building_detail.building_id)
+      batteries.each do |battery|
+        numofbatteries += 1
+        columns = Column.where(battery_id: battery.id)
+        columns.each do |column|
+          numofcolumns += 1
+          elevators = Elevator.where(column_id: column.id)
+          elevators.each do |elevator|
+            numofelevators += 1
+          end
+        end
+      end
+
+      if results then
+        coords = results
+        marker.lat coords[0]
+        marker.lng coords[1]
+        
+        # marker.picture({  
+        #   "url" => url_alert,  
+        #   "width" => 35,  
+        #   "height" => 30  
+        # })  
+        
+        marker.infowindow render_to_string(:partial => "/building_details/info",  :locals => 
+          {
+            :numbersoffloors => numoffloors,
+            :clientname => clientname,
+            :numberofbatteries => numofbatteries,
+            :numberofcolumns => numofcolumns,
+            :numberofelevators => numofelevators,
+            :fullnameofcontact => fullnameofcontact
+          }
+        )  
+      end
     end  
   end
 
