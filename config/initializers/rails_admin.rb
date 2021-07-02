@@ -1,5 +1,6 @@
 RailsAdmin.config do |config|
   require Rails.root.join('lib', 'watson.rb')
+  require Rails.root.join('lib', 'maps.rb')
   ### Popular gems integration
 
   ## == Devise ==
@@ -34,6 +35,7 @@ RailsAdmin.config do |config|
     delete
     show_in_app
     watson
+    maps
 
     ## With an audit adapter, you can add:
     # history_index

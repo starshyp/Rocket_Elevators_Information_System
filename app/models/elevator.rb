@@ -16,11 +16,7 @@ class Elevator < ApplicationRecord
 
     def send_sms()
         if (self.saved_change_to_Status? && self.Status == "Intervention")
-<<<<<<< HEAD
-        
-=======
             
->>>>>>> b0035f741725b6a8c6b307fdf70d323930ac4ee2
             account_sid = ENV['TWILIO-ACCOUNT']
             auth_token = ENV['TWILIO-TOKEN']
             client = Twilio::REST::Client.new(account_sid, auth_token)
