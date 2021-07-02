@@ -5,17 +5,24 @@ class AddressGeocode < ApplicationRecord
 	def self.fromAddress(address)
 		addresses = AddressGeocode.where(address: address)
 		if addresses.present? then
-			return [addresses.first.latitude,addresses.first.longtitude]
-		else
-			results = Geocoder.search(address)
-			if results.present? then
-				newaddress = AddressGeocode.new()
-				newaddress.address = address
-				newaddress.latitude = results.first.coordinates[0]
-				newaddress.longtitude = results.first.coordinates[1]
-				newaddress.save
-				return results.first.coordinates
+			if addresses.first.latitude != nil then
+				return [addresses.first.latitude,addresses.first.longtitude]
 			end
+			return nil
+		else
+			georesults = Geocoder.search(address)
+			newaddress = AddressGeocode.new()
+			newaddress.address = address
+			if georesults.present? then
+				newaddress.latitude = georesults.first.coordinates[0]
+				newaddress.longtitude = georesults.first.coordinates[1]
+				newaddress.save
+				return georesults.first.coordinates
+			end
+			newaddress.save
+			return nil
 		end
 	end
+
+	
 end

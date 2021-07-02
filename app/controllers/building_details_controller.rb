@@ -3,8 +3,6 @@ class BuildingDetailsController < ApplicationController
 
   # GET /building_details or /building_details.json
   def index
-    load_buildingmarkers
-
     @building_details = BuildingDetail.all
   end
 
@@ -56,57 +54,6 @@ class BuildingDetailsController < ApplicationController
       format.html { redirect_to building_details_url, notice: "Building detail was successfully destroyed." }
       format.json { head :no_content }
     end
-  end
-
-  
-  def load_buildingmarkers
-    @building_detail_default = Gmaps4rails.build_markers(Building.all) do |building1, marker|  
-      address1 = Address.where(id: building1.address_id).first
-      customer1 = Customer.where(id: building1.customer_id).first
-      buildingdetail1 = BuildingDetail.where(InformationKey: "number of floors", building_id: building1.id).first
-      results = AddressGeocode.fromAddress(address1.NumberAndStreet)
-
-      clientname = customer1.CompanyName
-      numoffloors = 0
-      numofbatteries = 0
-      numofcolumns = 0
-      numofelevators = 0
-      fullnameofcontact = customer1.NameOfContact
-
-      if buildingdetail1.present? then
-        numoffloors = buildingdetail1.Value
-      end
-
-      batteries = Battery.where(building_id: building1.id)
-      batteries.each do |battery|
-        numofbatteries += 1
-        columns = Column.where(battery_id: battery.id)
-        columns.each do |column|
-          numofcolumns += 1
-          elevators = Elevator.where(column_id: column.id)
-          elevators.each do |elevator|
-            numofelevators += 1
-          end
-        end
-      end
-
-      if results then
-        coords = results
-        marker.lat coords[0]
-        marker.lng coords[1]
-        
-        marker.infowindow render_to_string(:partial => "/building_details/info",  :locals => 
-          {
-            :numbersoffloors => numoffloors,
-            :clientname => clientname,
-            :numberofbatteries => numofbatteries,
-            :numberofcolumns => numofcolumns,
-            :numberofelevators => numofelevators,
-            :fullnameofcontact => fullnameofcontact
-          }
-        )  
-      end
-    end  
   end
 
   private

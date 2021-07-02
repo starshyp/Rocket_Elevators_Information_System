@@ -16,10 +16,6 @@ module RailsAdmin
         register_instance_option :link_icon do
 			'maps.html.erb'
         end
-
-        register_instance_option :link_icon do
-			'icon-image'
-		end
       end
     end
   end
