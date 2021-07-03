@@ -11,7 +11,7 @@ class Elevator < ApplicationRecord
         if $rocketseeding then
             return
         end
-        if $SlackClient and self.Status_changed? and self.Status_change[0].nil? then
+        if $SlackClient and self.Status_changed? then
             text = "The Elevator #{self.id} with Serial Number #{self.SerialNumber} changed status from #{self.Status_change[0]} to #{self.Status_change[1]}"
             $SlackClient.chat_postMessage(channel: '#elevator_operations', text: text, as_user: true)
         end
