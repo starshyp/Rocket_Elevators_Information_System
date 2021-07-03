@@ -9,6 +9,8 @@ require "faker"
 
 require 'twilio-ruby'
 
+
+$rocketseeding = true
 # put your own credentials here
 account_sid = ENV["TWILIO-ACCOUNT"]
 auth_token = ENV["TWILIO-TOKEN"]
