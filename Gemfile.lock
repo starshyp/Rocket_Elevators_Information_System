@@ -63,6 +63,7 @@ GEM
       async-io
       websocket-driver (~> 0.7.0)
     bcrypt (3.1.16)
+    bcrypt_pbkdf (1.1.0)
     bindex (0.8.1)
     bootsnap (1.7.5)
       msgpack (~> 1.0)
@@ -121,6 +122,7 @@ GEM
     dropbox_api (0.1.19)
       faraday (~> 1.0)
       oauth2 (~> 1.1)
+    ed25519 (1.2.4)
     erubi (1.10.0)
     eventmachine (1.2.7)
     execjs (2.8.1)
@@ -404,6 +406,7 @@ PLATFORMS
 
 DEPENDENCIES
   async-websocket (~> 0.8.0)
+  bcrypt_pbkdf
   bootsnap (>= 1.1.0)
   byebug
   cancancan
@@ -417,6 +420,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   dropbox_api
+  ed25519
   faker
   figaro
   geocoder

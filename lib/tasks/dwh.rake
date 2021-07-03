@@ -10,7 +10,10 @@ namespace :dwh do
 
   task :connection_postgres  do 
     conn = PG.connect(
-      dbname: "datawarehouse_development"
+      host: Rails.configuration.database_configuration["datawarehouse_development"]["host"],
+      dbname: Rails.configuration.database_configuration["datawarehouse_development"]["database"],
+      password: Rails.configuration.database_configuration["datawarehouse_development"]["password"],
+      user: Rails.configuration.database_configuration["datawarehouse_development"]["username"]
     )
     puts conn
     puts "connection postgres"
@@ -18,8 +21,12 @@ namespace :dwh do
   end
 
   task clear: :environment do
+    
     conn = PG.connect(
-      dbname: "datawarehouse_development"
+      host: Rails.configuration.database_configuration["datawarehouse_development"]["host"],
+      dbname: Rails.configuration.database_configuration["datawarehouse_development"]["database"],
+      password: Rails.configuration.database_configuration["datawarehouse_development"]["password"],
+      user: Rails.configuration.database_configuration["datawarehouse_development"]["username"]
     )
     puts "Clearing DWH data structure"
     conn.exec("TRUNCATE fact_quotes, fact_contacts, fact_elevators, dim_customers")
@@ -29,8 +36,12 @@ namespace :dwh do
   desc "Import from MySQL data to Postgres"
   task import: :environment do
     Rake::Task["dwh:clear"].invoke()
+    
     conn = PG.connect(
-      dbname: "datawarehouse_development"
+      host: Rails.configuration.database_configuration["datawarehouse_development"]["host"],
+      dbname: Rails.configuration.database_configuration["datawarehouse_development"]["database"],
+      password: Rails.configuration.database_configuration["datawarehouse_development"]["password"],
+      user: Rails.configuration.database_configuration["datawarehouse_development"]["username"]
     )
     puts "Rebuilding DWH data structure"
 
