@@ -4,7 +4,7 @@ require 'sinatra'
 class Elevator < ApplicationRecord
     belongs_to :column, optional: true
 
-    before_create :updated_elevator
+    before_update :updated_elevator
     after_update :send_sms
 
     def updated_elevator
