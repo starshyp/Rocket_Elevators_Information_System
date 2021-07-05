@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Fact Interventions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Employeeid</th>
+      <th>Buildingid</th>
+      <th>Columnid</th>
+      <th>Elevatorid</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th>Datetime</th>
+      <th>Result</th>
+      <th>Report</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fact_interventions.each do |fact_intervention| %>
+      <tr>
+        <td><%= fact_intervention.EmployeeID %></td>
+        <td><%= fact_intervention.BuildingID %></td>
+        <td><%= fact_intervention.ColumnID %></td>
+        <td><%= fact_intervention.ElevatorID %></td>
+        <td><%= fact_intervention.Start_date %></td>
+        <td><%= fact_intervention.End_date %></td>
+        <td><%= fact_intervention.datetime %></td>
+        <td><%= fact_intervention.Result %></td>
+        <td><%= fact_intervention.Report %></td>
+        <td><%= fact_intervention.Status %></td>
+        <td><%= link_to 'Show', fact_intervention %></td>
+        <td><%= link_to 'Edit', edit_fact_intervention_path(fact_intervention) %></td>
+        <td><%= link_to 'Destroy', fact_intervention, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fact Intervention', new_fact_intervention_path %>

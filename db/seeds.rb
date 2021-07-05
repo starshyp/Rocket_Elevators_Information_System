@@ -494,6 +494,22 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
           Notes: Faker::Lorem.sentence(word_count: 3)
         )
         puts elevator
+
+      # for _ in 1..4  #Loop FactIntervention in Column **********************
+        fact_interventions = Fact_interventions.create!(
+          EmployeeID: Faker::Number.number(digits: 10),
+          BuildingID: Faker::Number.number(digits: 10),
+          BatteryID: Faker::Number.number(digits: 10),
+          ColumnID: Faker::Number.number(digits: 10),
+          ElevatorID: Faker::Number.number(digits: 10),
+          Start_date: Faker::Date.backward(days: 14),
+          End_date: Faker::Date.backward(days: 14),
+          Result: Faker::Lorem.sentence(word_count: 3),
+          Report: Faker::Lorem.sentence(word_count: 3),
+          Status: Faker::Lorem.sentence(word_count: 3),
+        )
+        # puts elevator
+
       end
     end
   end
