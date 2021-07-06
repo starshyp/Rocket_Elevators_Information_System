@@ -495,22 +495,27 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
         )
         puts elevator
 
-      # for _ in 1..4  #Loop FactIntervention in Column **********************
-        fact_interventions = Fact_interventions.create!(
-          EmployeeID: Faker::Number.number(digits: 10),
-          BuildingID: Faker::Number.number(digits: 10),
-          BatteryID: Faker::Number.number(digits: 10),
-          ColumnID: Faker::Number.number(digits: 10),
-          ElevatorID: Faker::Number.number(digits: 10),
-          Start_date: Faker::Date.backward(days: 14),
-          End_date: Faker::Date.backward(days: 14),
-          Result: Faker::Lorem.sentence(word_count: 3),
-          Report: Faker::Lorem.sentence(word_count: 3),
-          Status: Faker::Lorem.sentence(word_count: 3),
-        )
-        # puts elevator
+        result_list = ["Success","failure", "Incomplete"]
+        status_list = ["Pending","InProgress", "Interrupted", "Resumed", "Complete"]
 
+        for _ in 1..4  #Loop FactIntervention in Column **********************
+          factt_intervention = FactIntervention.create(
+            EmployeeID: Faker::Number.number(digits: 4),
+            BuildingID: Faker::Number.number(digits: 4),
+            # BatteryID: Faker::Number.number(digits: 4),
+            # ColumnID: Faker::Number.number(digits: 4),
+            # ElevatorID: Faker::Vehicle.vin,
+            Start_date: Faker::Date.backward(days: 14),
+            End_date: Faker::Date.backward(days: 14),
+            Result: result_list.sample,
+            # Report: Faker::Lorem.sentence(word_count: 3),
+            Status: status_list.sample
+            # Report => Success - Failure - Incomplete)
+            # Status => Pending - InProgress - Interrupted - Resumed - Complete
+          )
+          puts elevator
+        end
       end
-    end
-  end
+    end    
+  end      
 end
