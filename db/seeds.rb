@@ -502,16 +502,10 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
           factt_intervention = FactIntervention.create(
             EmployeeID: Faker::Number.number(digits: 4),
             BuildingID: Faker::Number.number(digits: 4),
-            # BatteryID: Faker::Number.number(digits: 4),
-            # ColumnID: Faker::Number.number(digits: 4),
-            # ElevatorID: Faker::Vehicle.vin,
             Start_date: Faker::Date.backward(days: 14),
             End_date: Faker::Date.backward(days: 14),
             Result: result_list.sample,
-            # Report: Faker::Lorem.sentence(word_count: 3),
             Status: status_list.sample
-            # Report => Success - Failure - Incomplete)
-            # Status => Pending - InProgress - Interrupted - Resumed - Complete
           )
           puts elevator
         end
