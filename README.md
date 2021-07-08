@@ -16,7 +16,6 @@ Submit a contact form using your email address.
 ```bash
 gem 'sendgrid-ruby'
 gem "figaro"
-gem "figaro"
 ```
 
 ### Implementation
@@ -168,7 +167,7 @@ en:
 ```
 *config/routes,rb*
 ```ruby
-post "/watson/refreshaudio", to: "watson#refreshaudio"
+get "/watson/refreshaudio", to: "watson#refreshaudio"
 ```
 
 
