@@ -447,13 +447,14 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
     Value: rand(2018..2021)
   )
   
-
+  randomstatus = ["Active", "Inactive"]
   # nbEmployee = Employee.count
 
   for _ in 1..1   # Loop Battery in Building *************************
     batteries = Battery.create!(
       building: building,
       BType: departements.sample,
+      Status: randomstatus.sample,
       employee_id: Employee.find(rand(Employee.count)+1).id,
       DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
       DateOfLastInspection: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
@@ -462,7 +463,7 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
       Notes: Faker::Lorem.sentence(word_count: 3)
     )
     puts batteries
-
+    
   # nbBattery = Battery.count
 
     for _ in 1..3  # Loop Column in Battery *********************
@@ -470,7 +471,7 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
         battery_id: batteries.id,
         ColumnType: departements.sample,
         NbOfFloorsServed: 1,
-        Status: "on",
+        Status: randomstatus.sample,
         Info: Faker::Lorem.sentence(word_count: 3),
         Notes: Faker::Lorem.sentence(word_count: 3)
       )
@@ -485,7 +486,7 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
           SerialNumber: Faker::Vehicle.vin,
           Model: Faker::Vehicle.model,
           ElevatorType: departements.sample,
-          Status: "on",
+          Status: randomstatus.sample,
           #Status: elevatorStatus,
           DateOfCommissioning: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),
           DateOfLastInspection: Faker::Date.between(from: '2021-06-15', to: '2021-12-30'),

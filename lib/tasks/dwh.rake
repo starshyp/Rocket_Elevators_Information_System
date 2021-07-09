@@ -2,6 +2,7 @@ namespace :dwh do
 
   desc 'My import task'
   require "pg"
+  
 
   task :connection_mysql do
     mysql = ActiveRecord::Base.establish_connection(Rails.configuration.database_configuration["datawarehouse_development"])
