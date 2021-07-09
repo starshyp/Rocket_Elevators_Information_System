@@ -22,13 +22,18 @@
   </div>
 
   <div class="field">
+    <%= form.label :BatteryID %>
+    <%= form.number_field :BuildingID %>
+  </div>
+
+  <div class="field">
     <%= form.label :ColumnID %>
-    <%= form.number_field :ColumnID %>
+    <%= form.number_field :BuildingID %>
   </div>
 
   <div class="field">
     <%= form.label :ElevatorID %>
-    <%= form.number_field :ElevatorID %>
+    <%= form.number_field :ColumnID %>
   </div>
 
   <div class="field">
@@ -39,11 +44,6 @@
   <div class="field">
     <%= form.label :End_date %>
     <%= form.text_field :End_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :datetime %>
-    <%= form.text_field :datetime %>
   </div>
 
   <div class="field">
