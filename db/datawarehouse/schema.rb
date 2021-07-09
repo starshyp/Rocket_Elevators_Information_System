@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_07_155639) do
+ActiveRecord::Schema.define(version: 2021_07_09_161802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,11 +43,11 @@ ActiveRecord::Schema.define(version: 2021_07_07_155639) do
   create_table "fact_interventions", force: :cascade do |t|
     t.integer "EmployeeID"
     t.integer "BuildingID"
+    t.integer "Battery_ID"
     t.integer "ColumnID"
     t.integer "ElevatorID"
     t.datetime "Start_date"
-    t.string "End_date"
-    t.string "datetime"
+    t.datetime "End_date"
     t.string "Result"
     t.string "Report"
     t.string "Status"
