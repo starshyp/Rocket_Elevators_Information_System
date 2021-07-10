@@ -2,6 +2,7 @@ namespace :dwh do
 
   desc 'My import task'
   require "pg"
+  require "faker"
   
 
   task :connection_mysql do
@@ -119,5 +120,30 @@ namespace :dwh do
     for i in 0...customers.length() do
       conn.exec_prepared("dimcustomers", customers[i])
     end
+  end
+
+  puts "    Building fact_interventions data structure"
+  # conn.prepare("factintervention", 'INSERT INTO fact_interventions ("EmployeeID", "BuildingID", "BatteryID", "ColumnID", "ElevatorID", "Start_date", "End_date", "Result", "Report", "Status" ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)')
+  conn.prepare("factintervention", 'INSERT INTO fact_interventions ("EmployeeID", "BuildingID", "Start_date", "End_date", "Result", "Status" ) VALUES ($1, $2, $3, $4, $5, $6)')
+
+  task intervention: :environment do
+    
+    result = ["Success", "Failure", "Incomplete"]
+    status = ["Pending", "In Progress", "Interrupted", "Resumed", "Complete"]
+    50.times do |i|
+      intervention = FactIntervention.create!(
+        Employee_ID: rand(50),
+        Building_ID: rand(50),
+        Battery_ID: rand(100),
+        Column_ID: rand(300),
+        Elevator_ID: rand(1000),
+        Start_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now),
+        End_date: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now),
+        Result: result.sample,
+        Report: Faker::Lorem.sentence(word_count: 3),
+        Status: status.sample,
+      )
+    end
+    conn.exec_prepared("factintervention", [index.EmployeeID, index.BuildingID, index.Start_date, index.End_date, index.Result, index.Status])
   end
 end
