@@ -75,7 +75,7 @@ class Lead < ApplicationRecord
 		# lead = Lead.find_by(email: self.Email)
 		# puts "lead"
 		if self.file.attached?
-			puts "*********************"
+			puts "*********************"  
 			puts self.AttachedFile
 			puts "*********************"
 			puts self.file.attached?
