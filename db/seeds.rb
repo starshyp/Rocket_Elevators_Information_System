@@ -496,20 +496,20 @@ for i in ((nbAddr/2).floor+1)..nbAddr   # Loop Building*******************
         )
         puts elevator
 
-        result_list = ["Success","failure", "Incomplete"]
-        status_list = ["Pending","InProgress", "Interrupted", "Resumed", "Complete"]
+        # result_list = ["Success","failure", "Incomplete"]
+        # status_list = ["Pending","InProgress", "Interrupted", "Resumed", "Complete"]
 
-        for _ in 1..4  #Loop FactIntervention in Column **********************
-          factt_intervention = FactIntervention.create(
-            EmployeeID: Faker::Number.number(digits: 4),
-            BuildingID: Faker::Number.number(digits: 4),
-            Start_date: Faker::Date.backward(days: 14),
-            End_date: Faker::Date.backward(days: 14),
-            Result: result_list.sample,
-            Status: status_list.sample
-          )
-          puts elevator
-        end
+        # for _ in 1..4  #Loop FactIntervention in Column **********************
+        #   factt_intervention = FactIntervention.create(
+        #     EmployeeID: Faker::Number.number(digits: 4),
+        #     BuildingID: Faker::Number.number(digits: 4),
+        #     Start_date: Faker::Date.backward(days: 14),
+        #     End_date: Faker::Date.backward(days: 14),
+        #     Result: result_list.sample,
+        #     Status: status_list.sample
+        #   )
+        #   puts elevator
+        # end
       end
     end    
   end      
